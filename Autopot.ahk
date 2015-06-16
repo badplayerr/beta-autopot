@@ -1153,11 +1153,11 @@ ReadFlasksData(hwnd, byRef FlasksData)
          FlasksData[A_Index].ChargesCurrent:=ReadMemUInt(pH,FlaskChargesPtr+0xC)
          FlasksData[A_Index].ChargesPerUse:=ReadMemUInt(pH,ReadMemUInt(pH,FlaskChargesPtr+8)+0xC)
 
-         FlaskMod1Ptr:=GetMultilevelPointer(ph,[currFlaskPtr,4,0x1C,4,4,0x10,0x7c,0x14,0x30])
+         FlaskMod1Ptr:=GetMultilevelPointer(ph,[currFlaskPtr,4,0x1C,4,4,0x10,0x7c,0x14,0x38])
          FlaskMod1Str:=ReadMemStr(ph,FlaskMod1Ptr,70,"UTF-16")
          FlasksData[A_Index].mod1:=FlaskMod1Str
 
-         FlaskMod2Ptr:=GetMultilevelPointer(ph,[currFlaskPtr,4,0x1C,4,4,0x10,0x7c,0x2c,0x30])
+         FlaskMod2Ptr:=GetMultilevelPointer(ph,[currFlaskPtr,4,0x1C,4,4,0x10,0x7c,0x2c,0x38])
          FlaskMod2Str:=ReadMemStr(ph,FlaskMod2Ptr,70,"UTF-16")
          FlasksData[A_Index].mod2:=FlaskMod2Str
 

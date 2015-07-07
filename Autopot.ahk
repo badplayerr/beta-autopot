@@ -998,7 +998,7 @@ ReadPlayerStats(hwnd, byRef PlayerStats)
       global Offset2:=0x4ac
       global Offset3:=0x140
       global Offset4:=0x220
-      global Offset5:=0x2f3c
+      global Offset5:=0x2fbc
       global Offset6:=0x15f4
       global Offset7:=0x15f8
       global Offset8:=0x108

@@ -1664,25 +1664,89 @@ Main()
   
       If (A_TickCount>=20secsTimer+20000)
       {
-         Loop, 5
-         {
-            IniRead, HotkeyFlask%A_Index%, %ConfigPath%, ACTION_KEYS, use_flask_in_slot%A_Index%, %A_Index%
-            vk:=HotkeyFlask%A_Index%
-            SetFormat, IntegerFast, hex
-            vk += 0
-            vk .= ""
-            SetFormat, IntegerFast, d
-            FlaskHotkey%A_Index%={vk%vk%
-         }
+         ;Loop, 5
+         ;{
+            FileRead, ProductionConfig, %ConfigPath%
+            ;FileReadLine, ProductionConfig, %ConfigPath%, 
 
-         IniRead, AttackInPlaceKey, %ConfigPath%, ACTION_KEYS, attack_in_place, %A_Index%
-         vk:=AttackInPlaceKey
-         SetFormat, IntegerFast, hex
-         vk += 0
-         vk .= ""
-         SetFormat, IntegerFast, d
-         AttackInPlaceKey=vk%vk%
+            Loop, read, %ConfigPath%
+            {
+                Loop, parse, A_LoopReadLine, %A_Tab%
+                {
+                     testfield = %A_LoopField%
+                     testfield .= ""
 
+                     IfInString, testfield, attack_in_place
+                     {
+                        StringGetPos, StringPos, testfield, =
+                        vk := SubStr(testfield, StringPos+2)
+                        SetFormat, IntegerFast, hex
+                        vk += 0
+                        vk .= ""
+                        SetFormat, IntegerFast, d
+                        AttackInPlaceKey=vk%vk%
+                        continue
+                     }
+                     IfInString, testfield, use_flask_in_slot1
+                     {
+                        StringGetPos, StringPos, testfield, =
+                        vk := SubStr(testfield, StringPos+2)
+                        SetFormat, IntegerFast, hex
+                        vk += 0
+                        vk .= ""
+                        SetFormat, IntegerFast, d
+                        FlaskHotkey1={vk%vk%
+                        continue
+                     }
+                     IfInString, testfield, use_flask_in_slot2
+                     {
+                        StringGetPos, StringPos, testfield, =
+                        vk := SubStr(testfield, StringPos+2)
+                        SetFormat, IntegerFast, hex
+                        vk += 0
+                        vk .= ""
+                        SetFormat, IntegerFast, d
+                        FlaskHotkey2={vk%vk%
+                        continue
+                     }
+                     IfInString, testfield, use_flask_in_slot3
+                     {
+                        StringGetPos, StringPos, testfield, =
+                        vk := SubStr(testfield, StringPos+2)
+                        SetFormat, IntegerFast, hex
+                        vk += 0
+                        vk .= ""
+                        SetFormat, IntegerFast, d
+                        FlaskHotkey3={vk%vk%
+                        continue
+                     }
+                     IfInString, testfield, use_flask_in_slot4
+                     {
+                        StringGetPos, StringPos, testfield, =
+                        vk := SubStr(testfield, StringPos+2)
+                        SetFormat, IntegerFast, hex
+                        vk += 0
+                        vk .= ""
+                        SetFormat, IntegerFast, d
+                        FlaskHotkey4={vk%vk%
+                        continue
+                     }
+                     IfInString, testfield, use_flask_in_slot5
+                     {
+                        StringGetPos, StringPos, testfield, =
+                        vk := SubStr(testfield, StringPos+2)
+                        SetFormat, IntegerFast, hex
+                        vk += 0
+                        vk .= ""
+                        SetFormat, IntegerFast, d
+                        FlaskHotkey5={vk%vk%
+                        continue
+                     }
+                }
+            }
+            ;FlaskHotkey%A_Index%={vk%vk%
+         ;}
+         
          20secsTimer:=A_TickCount
       }
 
@@ -1756,7 +1820,7 @@ Main()
 			}
 			Else If (autoQuitMode=1)
 			{
-				QuitToLoginScreen(WinID%A_Index%)
+				run, cports.exe /close * * * * PathofExile.exe
 				continue
 			}
 			Else If (autoQuitMode=3)
@@ -4310,7 +4374,7 @@ DoHotkey4:
 return
 
 DoHotkey5:
-   QuitToLoginScreen(WinActive("A"))
+   run, cports.exe /close * * * * PathofExile.exe
 return
 
 DoHotkey6:
@@ -5077,10 +5141,10 @@ DPSCalc()
          }
     
          ; Get item level
-         IfInString, A_LoopField, Itemlevel:
+         IfInString, A_LoopField, Item level:
          {
             StringSplit, ItemLevelArray, A_LoopField, %A_Space%
-            ItemLevel := ItemLevelArray2
+            ItemLevel := ItemLevelArray3
             Continue
          }
     

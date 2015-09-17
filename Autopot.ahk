@@ -2070,8 +2070,9 @@ Main()
 
          Else If (InStr(playerstats.BuffName[A_Index], "corrupted_blood") || InStr(playerstats.BuffName[A_Index], "腐化之血"))
          {
+            global RemoveCorruptedBloodCharges
             BuffCharges:=PlayerStats.BuffCharges[A_Index]
-            If ((FlaskOnCorruptedBloodCheck) && (BuffCharges>=RemCorruptedBloodCharges))
+            If ((FlaskOnCorruptedBloodCheck) && (BuffCharges>=RemoveCorruptedBloodCharges))
             {
                If ((!WindowQueuedFlaskEffects[k].HasKey("CorruptedBloodQueueEndtime")) || (A_TickCount>=(WindowQueuedFlaskEffects[k].CorruptedBloodQueueEndtime-lagCompensation)))
                {
@@ -2108,6 +2109,44 @@ Main()
             continue
          }
 
+         Else If InStr(playerstats.BuffName[A_Index], "puncture")
+         {
+            If ((FlaskOnCorruptedBloodCheck))
+            {
+               If ((!WindowQueuedFlaskEffects[k].HasKey("CorruptedBloodQueueEndtime")) || (A_TickCount>=(WindowQueuedFlaskEffects[k].CorruptedBloodQueueEndtime-lagCompensation)))
+               {
+                  If Taiwan
+                  {
+                     flaskNum:=GetMaxChargesFlaskOfMod(FlasksData,"止血之")
+                  }
+                  else
+                  {
+                     flaskNum:=GetMaxChargesFlaskOfMod(FlasksData,"of Staunching")
+                  }
+
+                  If (flaskNum!="")
+                  {  
+                     WindowQueuedFlaskEffects[k].CorruptedBloodQueueEndtime:=A_TickCount+300
+                     
+                     If (trayNotIfications)
+                     {
+                        TrayTip, PoE AutoFlask Using "of Staunching" flask %flaskNum%, %A_Space% , 2
+                     }
+                     hKey:=FlaskHotkey%flaskNum%
+                     IfWinActive Path of Exile ahk_class Direct3DWindowClass
+                     {
+                        Sendinput, %hkey% Down}
+                        Sendinput, %hkey% Up}
+                     } 
+                     Else
+                     {
+                        ControlSend,,%hkey% Down %hkey% Up}, % "ahk_id" hwnd
+                     }
+                  }
+               }
+            }
+            continue
+         }
          /* Lag dependent?
          Else If InStr(playerstats.BuffName[A_Index], "flask_effect_Life")
          {

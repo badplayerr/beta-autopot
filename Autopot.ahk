@@ -998,7 +998,7 @@ ReadPlayerStats(hwnd, byRef PlayerStats)
       global Offset2:=0x4ac
       global Offset3:=0x140
       global Offset4:=0x220
-      global Offset5:=0x2fbc
+      global Offset5:=0x303c
       global Offset6:=0x15f4
       global Offset7:=0x15f8
       global Offset8:=0x108
@@ -2029,7 +2029,7 @@ Main()
 				continue
 			}
 
-         Else If (((InStr(playerstats.BuffName[A_Index], "curse")) || InStr(playerstats.BuffName[A_Index], "冰凍")) And !(InStr(playerstats.BuffName[A_Index], "flask")))
+         Else If (((InStr(playerstats.BuffName[A_Index], "curse")) || InStr(playerstats.BuffName[A_Index], "冰凍")) And !(InStr(playerstats.BuffName[A_Index], "flask")) And (PlayerStats.BuffTimer[A_Index]>2))
          {
             If (FlaskOnCurseCheck)
             {

@@ -2029,7 +2029,7 @@ Main()
 				continue
 			}
 
-         Else If (((InStr(playerstats.BuffName[A_Index], "curse")) || InStr(playerstats.BuffName[A_Index], "冰凍")) And !(InStr(playerstats.BuffName[A_Index], "flask")) And (PlayerStats.BuffTimer[A_Index]>2))
+         Else If (((InStr(playerstats.BuffName[A_Index], "curse")) || InStr(playerstats.BuffName[A_Index], "冰凍")) And !(InStr(playerstats.BuffName[A_Index], "flask")) And !(PlayerStats.BuffTimer[A_Index]="1.#INF00"))
          {
             If (FlaskOnCurseCheck)
             {

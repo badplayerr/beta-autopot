@@ -998,13 +998,13 @@ ReadPlayerStats(hwnd, byRef PlayerStats)
       global Offset2:=0x4ac
       global Offset3:=0x140
       global Offset4:=0x220
-      global Offset5:=0x303c
+      global Offset5:=0x30bc
       global Offset6:=0x15f4
       global Offset7:=0x15f8
       global Offset8:=0x108
       global Offset9:=0xEC
       global Offset10:=0x134
-      global Offset11:=0x1a8
+      global Offset11:=0x1ac
    }
    Else If (Singapore)
    {
@@ -1082,7 +1082,7 @@ ReadPlayerStats(hwnd, byRef PlayerStats)
    PlayerStats.PanelWaypoint:=ReadMemUInt(pH,PanelWaypointOffset+0x7e0)
    MouseOnEnemyOffset:=ReadMemUInt(pH,CheckBase+Offset8+0xA0)
    PlayerStats.MouseOnEnemyStatus:=ReadMemUInt(pH,MouseOnEnemyOffset+0x7e0)
-   PanelInstanceManagerOffset:=ReadMemUInt(pH,CheckBase+Offset8+0xB8)  ;added by immor
+   PanelInstanceManagerOffset:=ReadMemUInt(pH,CheckBase+Offset8+0xBc)  ;added by immor
    PlayerStats.PanelInstanceManager:=ReadMemUInt(pH,PanelInstanceManagerOffset+0x7e0) ;added by immor
    InCityOffset:=GetMultilevelPointer(pH,[CheckBase+Offset10,0x708,0x208])
    PlayerStats.InCity:=ReadMemUInt(pH,InCityOffset+0x7e0)

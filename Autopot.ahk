@@ -995,16 +995,16 @@ ReadPlayerStats(hwnd, byRef PlayerStats)
    Else If (GlobalS)
    {
       global Offset1:=0x13c
-      global Offset2:=0x4ac
+      global Offset2:=0x4b4
       global Offset3:=0x140
       global Offset4:=0x220
-      global Offset5:=0x30bc
+      global Offset5:=0x3344
       global Offset6:=0x15f4
       global Offset7:=0x15f8
       global Offset8:=0x108
       global Offset9:=0xEC
       global Offset10:=0x134
-      global Offset11:=0x1ac
+      global Offset11:=0x1c0
    }
    Else If (Singapore)
    {
@@ -1080,16 +1080,16 @@ ReadPlayerStats(hwnd, byRef PlayerStats)
    PlayerStats.PanelSkillTree:=ReadMemUInt(pH,PanelSkillTreeOffset+0x7e0)
    PanelWaypointOffset:=ReadMemUInt(pH,CheckBase+Offset8+0x28)
    PlayerStats.PanelWaypoint:=ReadMemUInt(pH,PanelWaypointOffset+0x7e0)
-   MouseOnEnemyOffset:=ReadMemUInt(pH,CheckBase+Offset8+0xA0)
+   MouseOnEnemyOffset:=ReadMemUInt(pH,CheckBase+Offset8+0xb8)
    PlayerStats.MouseOnEnemyStatus:=ReadMemUInt(pH,MouseOnEnemyOffset+0x7e0)
-   PanelInstanceManagerOffset:=ReadMemUInt(pH,CheckBase+Offset8+0xBc)  ;added by immor
+   PanelInstanceManagerOffset:=ReadMemUInt(pH,CheckBase+Offset8+0xD0)  ;added by immor
    PlayerStats.PanelInstanceManager:=ReadMemUInt(pH,PanelInstanceManagerOffset+0x7e0) ;added by immor
-   InCityOffset:=GetMultilevelPointer(pH,[CheckBase+Offset10,0x708,0x208])
+   InCityOffset:=GetMultilevelPointer(pH,[CheckBase+Offset10,0x708,0x20C])
    PlayerStats.InCity:=ReadMemUInt(pH,InCityOffset+0x7e0)
-   EnemyNamePtr:=GetMultilevelPointer(ph,[CheckBase+Offset11,0x900,0xba0])
+   EnemyNamePtr:=GetMultilevelPointer(ph,[CheckBase+Offset11,0x90c,0xbac])
    EnemyName:=ReadMemStr(ph,EnemyNamePtr,70,"UTF-16")
    PlayerStats.EnemyName:=EnemyName
-   EnemyNamePtr2:=GetMultilevelPointer(ph,[CheckBase+Offset11,0x900,0xb20])
+   EnemyNamePtr2:=GetMultilevelPointer(ph,[CheckBase+Offset11,0x90c,0xb2c])
    EnemyName2:=ReadMemStr(ph,EnemyNamePtr2+0x32,70,"UTF-16")
    PlayerStats.EnemyName2:=EnemyName2
 
@@ -1107,7 +1107,7 @@ ReadFlasksData(hwnd, byRef FlasksData)
    If (!UiBase) ;not InGame
       return
    
-   FlaskInvBase:=GetMultilevelPointer(pH,[UiBase+0x8f0,0x90c,0x20])
+   FlaskInvBase:=GetMultilevelPointer(pH,[UiBase+0x8fc,0x918,0x20])
 
    Loop, 5
    {

@@ -244,22 +244,22 @@ Gui, Add, GroupBox, x12 y180 w220 h60, Auto Quit Method
 IniRead, AutoQuitMethod , Config.ini, Config, AutoQuitMethod, 1
 If AutoQuitMethod = 1
 {
-   Gui, Add, DropDownList, x22 y200 w200 h21 AltSubmit gAutoQuitList vAutoQuitChoice R5, Exit to Login Screen||Alt+F4 (Fastest according to Chris)|Use a Portal (On Testing)|Disabled
+   Gui, Add, DropDownList, x22 y200 w200 h21 AltSubmit gAutoQuitList vAutoQuitChoice R5, Exit to Login Screen (Using cports)||Exit to Login Screen (Writes to Memory)|Alt+F4 (Fastest according to Chris)|Disabled
    autoQuitMode:=1
 }
 Else If AutoQuitMethod = 2
 {
-   Gui, Add, DropDownList, x22 y200 w200 h21 AltSubmit gAutoQuitList vAutoQuitChoice R5, Exit to Login Screen|Alt+F4 (Fastest according to Chris)||Use a Portal (On Testing)|Disabled
+   Gui, Add, DropDownList, x22 y200 w200 h21 AltSubmit gAutoQuitList vAutoQuitChoice R5, Exit to Login Screen (Using cports)|Exit to Login Screen (Writes to Memory)||Alt+F4 (Fastest according to Chris)|Disabled
    autoQuitMode:=0
 }
 Else If AutoQuitMethod = 3
 {
-   Gui, Add, DropDownList, x22 y200 w200 h21 AltSubmit gAutoQuitList vAutoQuitChoice R5, Exit to Login Screen|Alt+F4 (Fastest according to Chris)|Use a Portal (On Testing)||Disabled
+   Gui, Add, DropDownList, x22 y200 w200 h21 AltSubmit gAutoQuitList vAutoQuitChoice R5, Exit to Login Screen (Using cports)|Exit to Login Screen (Writes to Memory)|Alt+F4 (Fastest according to Chris)||Disabled
    autoQuitMode:=3
 }
 Else If AutoQuitMethod = 4
 {
-   Gui, Add, DropDownList, x22 y200 w200 h21 AltSubmit gAutoQuitList vAutoQuitChoice R5, Exit to Login Screen|Alt+F4 (Fastest according to Chris)|Use a Portal (On Testing)|Disabled||
+   Gui, Add, DropDownList, x22 y200 w200 h21 AltSubmit gAutoQuitList vAutoQuitChoice R5, Exit to Login Screen (Using cports)|Exit to Login Screen (Writes to Memory)|Alt+F4 (Fastest according to Chris)|Disabled||
    autoQuitMode:=4
 }
 
@@ -1060,7 +1060,7 @@ ReadPlayerStats(hwnd, byRef PlayerStats)
       BuffNamePtr:=GetMultilevelPointer(ph,[BuffBasePtr+4,0])
       BuffNameStr:=ReadMemStr(ph,BuffNamePtr,70,"UTF-16")
       PlayerStats.BuffName[A_Index]:=BuffNameStr
-      BuffCharges:=ReadMemUInt(pH,BuffBasePtr+0x1C)
+      BuffCharges:=ReadMemUInt(pH,BuffBasePtr+0x20)
       PlayerStats.BuffCharges[A_Index]:=BuffCharges
       BuffTimer:=ReadMemFloat(pH,BuffBasePtr+0xC)
       PlayerStats.BuffTimer[A_Index]:=BuffTimer
@@ -1809,13 +1809,7 @@ Main()
 		{
 			If (autoQuitMode=0)
 			{
-            WinActivate Path of Exile ahk_class Direct3DWindowClass
-				IfWinActive Path of Exile ahk_class Direct3DWindowClass
-            {
-               SendInput {ALT Down}
-               SendInput {F4}
-               SendInput {ALT Up}
-            }
+				QuitToLoginScreen(WinID%A_Index%)
 				continue
 			}
 			Else If (autoQuitMode=1)
@@ -1825,7 +1819,13 @@ Main()
 			}
 			Else If (autoQuitMode=3)
 			{
-				UsePortal()
+            WinActivate Path of Exile ahk_class Direct3DWindowClass
+				IfWinActive Path of Exile ahk_class Direct3DWindowClass
+            {
+               SendInput {ALT Down}
+               SendInput {F4}
+               SendInput {ALT Up}
+            }
 				continue
 			}
 			Else If (autoQuitMode=4)
@@ -3929,10 +3929,7 @@ AutoQuitList:
    If AutoQuitChoice = 2
    autoQuitMode:=0
    If AutoQuitChoice = 3
-   {
-      MsgBox, This is still beta. This is only for testing.`nDont use in Harcore`nWorks Better on Bigger Resolutions`nPut the Portal Scroll on the Top-Left of your Inventory`n`nTest With [Ctrl+F4] First`n`nUse Ctrl+Alt+Del to unstuck.
-      autoQuitMode:=3
-   }
+   autoQuitMode:=3
    If AutoQuitChoice = 4
    autoQuitMode:=4
    
@@ -4413,7 +4410,29 @@ DoHotkey4:
 return
 
 DoHotkey5:
-   run, cports.exe /close * * * * PathofExile.exe
+
+			If (autoQuitMode=0)
+			{
+				 QuitToLoginScreen(WinActive("A"))
+			}
+			Else If (autoQuitMode=1)
+			{
+				run, cports.exe /close * * * * PathofExile.exe
+			}
+			Else If (autoQuitMode=3)
+			{
+            WinActivate Path of Exile ahk_class Direct3DWindowClass
+				IfWinActive Path of Exile ahk_class Direct3DWindowClass
+            {
+               SendInput {ALT Down}
+               SendInput {F4}
+               SendInput {ALT Up}
+            }
+			}
+			Else If (autoQuitMode=4)
+			{
+               run, cports.exe /close * * * * PathofExile.exe
+			}
 return
 
 DoHotkey6:

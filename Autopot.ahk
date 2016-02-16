@@ -5306,8 +5306,8 @@ DPSCalc()
 
       ; Show tooltip, with fixed width font
       ToolTip, %TT%, X + 35, Y + 35
-      global FixedFont
-      SetFont(FixedFont)
+      ;global FixedFont
+      ;SetFont(FixedFont)
       ; Set up count variable and start timer for tooltip timeout
       global ToolTipTimeout := 0
       SetTimer, ToolTipTimer, 100

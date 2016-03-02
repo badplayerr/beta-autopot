@@ -771,8 +771,8 @@ PlayerConfig["Default"].FlaskConfig:=[]
 
 WindowQueuedFlaskEffects:=[] ;keyed by "%hwnd%%CurrPid%", hpQueueEndtime, manaQueueEndtime
 
-basePtrAoBArray:=[0x00,0x00,0x53,0x55,0x33,0xDB,0x56,0x57,0x3B,0xC3]
-basePtrAobOffset:=-0x08
+basePtrAoBArray:=[0x16,0x8B,0x8D,0x48,0xFF,0xFF,0xFF,0x42,0x6A,0x02,0xE8,0x05,0xCD,0xDE,0xFF,0xA1]
+basePtrAobOffset:=+0x10
 
 WindowBasicsCache:=[] ; keyed by "%hwnd%%CurrPid%", entries are objects with properties processHandle, moduleBase, moduleSize, baseFramePtr
 
@@ -933,7 +933,7 @@ GetUiBase(hwnd)
    FrameBase:=GetFrameBase(hwnd)
    If (FrameBase="" || FrameBase=0)
       return
-   uiBase:=GetMultilevelPointer(pH,[FrameBase+Offset3,Offset4,0x50])
+   uiBase:=GetMultilevelPointer(pH,[FrameBase+Offset3,Offset4,0x48])
    return uiBase
 }
 
@@ -994,17 +994,17 @@ ReadPlayerStats(hwnd, byRef PlayerStats)
    }
    Else If (GlobalS)
    {
-      global Offset1:=0x13c
+      global Offset1:=0x138
       global Offset2:=0x4b4
-      global Offset3:=0x140
+      global Offset3:=0x13c
       global Offset4:=0x220
-      global Offset5:=0x3344
-      global Offset6:=0x15f4
-      global Offset7:=0x15f8
-      global Offset8:=0x108
-      global Offset9:=0xEC
-      global Offset10:=0x134
-      global Offset11:=0x1c0
+      global Offset5:=0x3328
+      global Offset6:=0x15BC
+      global Offset7:=0x15C0
+      global Offset8:=0x100
+      global Offset9:=0xE4
+      global Offset10:=0x12c
+      global Offset11:=0x1b4
    }
    Else If (Singapore)
    {
@@ -1029,18 +1029,18 @@ ReadPlayerStats(hwnd, byRef PlayerStats)
    ;PlayerStats.ConfigPath:=ReadMemStr(ph,Config+0xa4,255,"UTF-16")
    PlayerMain:=ReadMemUInt(pH,PlayerBase+4)
    PlayerStatsOffset:=ReadMemUInt(pH,PlayerMain+0xC)
-   PlayerStats.MaxHP:=ReadMemUInt(pH,PlayerStatsOffset+0x30)
-   PlayerStats.CurrHP:=ReadMemUInt(pH,PlayerStatsOffset+0x34)  
-   PlayerStats.ReservedHPFlat:=ReadMemUInt(pH,PlayerStatsOffset+0x3C)
-   PlayerStats.ReservedHPPercent:=ReadMemUInt(pH,PlayerStatsOffset+0x40)
-   PlayerStats.MaxMana:=ReadMemUInt(pH,PlayerStatsOffset+0x54)
-   PlayerStats.ReservedManaFlat:=ReadMemUInt(pH,PlayerStatsOffset+0x60)
-   PlayerStats.ReservedManaPercent:=ReadMemUInt(pH,PlayerStatsOffset+0x64)
-   PlayerStats.CurrMana:=ReadMemUInt(pH,PlayerStatsOffset+0x58)
-   PlayerStats.MaxEShield:=ReadMemUInt(pH,PlayerStatsOffset+0x78)
-   PlayerStats.CurrEShield:=ReadMemUInt(pH,PlayerStatsOffset+0x7C)
+   PlayerStats.MaxHP:=ReadMemUInt(pH,PlayerStatsOffset+0x2c)
+   PlayerStats.CurrHP:=ReadMemUInt(pH,PlayerStatsOffset+0x30)  
+   PlayerStats.ReservedHPFlat:=ReadMemUInt(pH,PlayerStatsOffset+0x38)
+   PlayerStats.ReservedHPPercent:=ReadMemUInt(pH,PlayerStatsOffset+0x3c)
+   PlayerStats.MaxMana:=ReadMemUInt(pH,PlayerStatsOffset+0x50)
+   PlayerStats.ReservedManaFlat:=ReadMemUInt(pH,PlayerStatsOffset+0x5c)
+   PlayerStats.ReservedManaPercent:=ReadMemUInt(pH,PlayerStatsOffset+0x60)
+   PlayerStats.CurrMana:=ReadMemUInt(pH,PlayerStatsOffset+0x54)
+   PlayerStats.MaxEShield:=ReadMemUInt(pH,PlayerStatsOffset+0x74)
+   PlayerStats.CurrEShield:=ReadMemUInt(pH,PlayerStatsOffset+0x78)
    PlayerActionIDOffset:=ReadMemUInt(pH,PlayerMain+0x1C)
-   PlayerStats.PlayerActionID:=ReadMemUInt(pH,PlayerActionIDOffset+0x7C)
+   PlayerStats.PlayerActionID:=ReadMemUInt(pH,PlayerActionIDOffset+0x70)
    /*
    SetFormat, IntegerFast, hex
    PlayerActionID += 0
@@ -1050,8 +1050,8 @@ ReadPlayerStats(hwnd, byRef PlayerStats)
    PlayerStats.PlayerActionID:=PlayerActionID2
    */
 
-   BuffListStart:=ReadMemUInt(pH,PlayerStatsOffset+0x98)
-   BuffListEnd:=ReadMemUInt(pH,PlayerStatsOffset+0x9C)
+   BuffListStart:=ReadMemUInt(pH,PlayerStatsOffset+0x94)
+   BuffListEnd:=ReadMemUInt(pH,PlayerStatsOffset+0x98)
    BuffAmount:=((BuffListEnd-BuffListStart)/4)
    PlayerStats.BuffAmount:=((BuffListEnd-BuffListStart)/4)
    Loop, %BuffAmount%
@@ -1070,26 +1070,26 @@ ReadPlayerStats(hwnd, byRef PlayerStats)
    CheckBase:=GetMultilevelPointer(pH,[fBase+Offset3,Offset4])
 
    ChatStatusOffset:=GetMultilevelPointer(pH,[CheckBase+Offset9,0x788,0x0])
-   PlayerStats.ChatStatus:=ReadMemUInt(pH,ChatStatusOffset+0x7e0)
+   PlayerStats.ChatStatus:=ReadMemUInt(pH,ChatStatusOffset+0x7d4)
 
    PanelInventoryOffset:=ReadMemUInt(pH,CheckBase+Offset8)
-   PlayerStats.PanelInventory:=ReadMemUInt(pH,PanelInventoryOffset+0x7e0)
+   PlayerStats.PanelInventory:=ReadMemUInt(pH,PanelInventoryOffset+0x7d4)
    PanelSocialOffset:=ReadMemUInt(pH,CheckBase+Offset8+0x10)
-   PlayerStats.PanelSocial:=ReadMemUInt(pH,PanelSocialOffset+0x7e0)
+   PlayerStats.PanelSocial:=ReadMemUInt(pH,PanelSocialOffset+0x7d4)
    PanelSkillTreeOffset:=ReadMemUInt(pH,CheckBase+Offset8+0x14)
-   PlayerStats.PanelSkillTree:=ReadMemUInt(pH,PanelSkillTreeOffset+0x7e0)
+   PlayerStats.PanelSkillTree:=ReadMemUInt(pH,PanelSkillTreeOffset+0x7d4)
    PanelWaypointOffset:=ReadMemUInt(pH,CheckBase+Offset8+0x28)
-   PlayerStats.PanelWaypoint:=ReadMemUInt(pH,PanelWaypointOffset+0x7e0)
-   MouseOnEnemyOffset:=ReadMemUInt(pH,CheckBase+Offset8+0xb8)
-   PlayerStats.MouseOnEnemyStatus:=ReadMemUInt(pH,MouseOnEnemyOffset+0x7e0)
+   PlayerStats.PanelWaypoint:=ReadMemUInt(pH,PanelWaypointOffset+0x7d4)
+   MouseOnEnemyOffset:=ReadMemUInt(pH,CheckBase+Offset8+0xb4)
+   PlayerStats.MouseOnEnemyStatus:=ReadMemUInt(pH,MouseOnEnemyOffset+0x7d4)
    PanelInstanceManagerOffset:=ReadMemUInt(pH,CheckBase+Offset8+0xD0)  ;added by immor
-   PlayerStats.PanelInstanceManager:=ReadMemUInt(pH,PanelInstanceManagerOffset+0x7e0) ;added by immor
-   InCityOffset:=GetMultilevelPointer(pH,[CheckBase+Offset10,0x708,0x20C])
-   PlayerStats.InCity:=ReadMemUInt(pH,InCityOffset+0x7e0)
-   EnemyNamePtr:=GetMultilevelPointer(ph,[CheckBase+Offset11,0x90c,0xbac])
+   PlayerStats.PanelInstanceManager:=ReadMemUInt(pH,PanelInstanceManagerOffset+0x7d4) ;added by immor
+   InCityOffset:=GetMultilevelPointer(pH,[CheckBase+Offset10,0x708,0x204])
+   PlayerStats.InCity:=ReadMemUInt(pH,InCityOffset+0x7d4)
+   EnemyNamePtr:=GetMultilevelPointer(ph,[CheckBase+Offset11,0x8fc,0xb6c])
    EnemyName:=ReadMemStr(ph,EnemyNamePtr,70,"UTF-16")
    PlayerStats.EnemyName:=EnemyName
-   EnemyNamePtr2:=GetMultilevelPointer(ph,[CheckBase+Offset11,0x90c,0xb2c])
+   EnemyNamePtr2:=GetMultilevelPointer(ph,[CheckBase+Offset11,0x8fc,0xb04])
    EnemyName2:=ReadMemStr(ph,EnemyNamePtr2+0x32,70,"UTF-16")
    PlayerStats.EnemyName2:=EnemyName2
 
@@ -1107,7 +1107,7 @@ ReadFlasksData(hwnd, byRef FlasksData)
    If (!UiBase) ;not InGame
       return
    
-   FlaskInvBase:=GetMultilevelPointer(pH,[UiBase+0x8fc,0x918,0x20])
+   FlaskInvBase:=GetMultilevelPointer(pH,[UiBase+0x8ec,0x908,0x20])
 
    Loop, 5
    {
@@ -1153,23 +1153,23 @@ ReadFlasksData(hwnd, byRef FlasksData)
          FlasksData[A_Index].ChargesCurrent:=ReadMemUInt(pH,FlaskChargesPtr+0xC)
          FlasksData[A_Index].ChargesPerUse:=ReadMemUInt(pH,ReadMemUInt(pH,FlaskChargesPtr+8)+0xC)
 
-         FlaskMod1Ptr:=GetMultilevelPointer(ph,[currFlaskPtr,4,0x1C,4,4,0x10,0x7c,0x14,0x38])
+         FlaskMod1Ptr:=GetMultilevelPointer(ph,[currFlaskPtr,4,0x1C,4,4,0x10,0x68,0x10,0x38])
          FlaskMod1Str:=ReadMemStr(ph,FlaskMod1Ptr,70,"UTF-16")
          FlasksData[A_Index].mod1:=FlaskMod1Str
 
-         FlaskMod2Ptr:=GetMultilevelPointer(ph,[currFlaskPtr,4,0x1C,4,4,0x10,0x7c,0x2c,0x38])
+         FlaskMod2Ptr:=GetMultilevelPointer(ph,[currFlaskPtr,4,0x1C,4,4,0x10,0x68,0x24,0x38])
          FlaskMod2Str:=ReadMemStr(ph,FlaskMod2Ptr,70,"UTF-16")
          FlasksData[A_Index].mod2:=FlaskMod2Str
 
          If (FlasksData[A_Index].ChargesCurrent < FlasksData[A_Index].ChargesPerUse) ; not enough charges in this flask to use it, don't bother
             continue
 
-         FlaskMetadataPtr:=GetMultilevelPointer(ph,[currFlaskPtr,0,8])
+         FlaskMetadataPtr:=GetMultilevelPointer(ph,[currFlaskPtr,0,0xC])
          FlaskMetadataStr:=ReadMemStr(ph,FlaskMetadataPtr,70,"UTF-16")
          FlaskTypeStr:=SubStr(FlaskMetadataStr,23)
          FlasksData[A_Index].type:=FlaskTypeStr
 
-         FlaskLocalstatsPtr:=GetMultilevelPointer(ph,[currFlaskPtr,4,0x18,0x20,0xC])
+         FlaskLocalstatsPtr:=GetMultilevelPointer(ph,[currFlaskPtr,4,0x18,0x1c,0xC])
          
          If InStr(FlaskTypeStr, "FlaskLife")
          {

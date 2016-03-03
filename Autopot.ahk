@@ -771,8 +771,8 @@ PlayerConfig["Default"].FlaskConfig:=[]
 
 WindowQueuedFlaskEffects:=[] ;keyed by "%hwnd%%CurrPid%", hpQueueEndtime, manaQueueEndtime
 
-basePtrAoBArray:=[0x16,0x8B,0x8D,0x48,0xFF,0xFF,0xFF,0x42,0x6A,0x02,0xE8,0x05,0xCD,0xDE,0xFF,0xA1]
-basePtrAobOffset:=+0x10
+basePtrAoBArray:=[0x84,0xC9,0x56,0x0F,0x94,0xC1,0x84]
+basePtrAobOffset:=-0x09
 
 WindowBasicsCache:=[] ; keyed by "%hwnd%%CurrPid%", entries are objects with properties processHandle, moduleBase, moduleSize, baseFramePtr
 

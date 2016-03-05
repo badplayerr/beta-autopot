@@ -890,7 +890,7 @@ GetFrameBase(hwnd)
          ScanBaseMgrPtr(mBase, pH, mSize)
       }
 
-      fB:=GetMultilevelPointer(pH,[mBase+baseMgrPtr,4,0x7C,0x9c])
+      fB:=GetMultilevelPointer(pH,[mBase+baseMgrPtr,4,0x7C,0x11c])
       WindowBasicsCache[k].fBase:=fB
    }
    return fB
@@ -995,16 +995,16 @@ ReadPlayerStats(hwnd, byRef PlayerStats)
    Else If (GlobalS)
    {
       global Offset1:=0x138
-      global Offset2:=0x4b4
+      global Offset2:=0x4b8
       global Offset3:=0x13c
       global Offset4:=0x220
-      global Offset5:=0x3328
-      global Offset6:=0x15BC
-      global Offset7:=0x15C0
+      global Offset5:=0x34b4
+      global Offset6:=0x1588
+      global Offset7:=0x158c
       global Offset8:=0x100
       global Offset9:=0xE4
       global Offset10:=0x12c
-      global Offset11:=0x1b4
+      global Offset11:=0x1b8
    }
    Else If (Singapore)
    {
@@ -1084,12 +1084,12 @@ ReadPlayerStats(hwnd, byRef PlayerStats)
    PlayerStats.MouseOnEnemyStatus:=ReadMemUInt(pH,MouseOnEnemyOffset+0x7d4)
    PanelInstanceManagerOffset:=ReadMemUInt(pH,CheckBase+Offset8+0xD0)  ;added by immor
    PlayerStats.PanelInstanceManager:=ReadMemUInt(pH,PanelInstanceManagerOffset+0x7d4) ;added by immor
-   InCityOffset:=GetMultilevelPointer(pH,[CheckBase+Offset10,0x708,0x204])
+   InCityOffset:=GetMultilevelPointer(pH,[CheckBase+Offset10,0x708,0x284])
    PlayerStats.InCity:=ReadMemUInt(pH,InCityOffset+0x7d4)
-   EnemyNamePtr:=GetMultilevelPointer(ph,[CheckBase+Offset11,0x8fc,0xb6c])
+   EnemyNamePtr:=GetMultilevelPointer(ph,[CheckBase+Offset11,0x8fc,0xb68])
    EnemyName:=ReadMemStr(ph,EnemyNamePtr,70,"UTF-16")
    PlayerStats.EnemyName:=EnemyName
-   EnemyNamePtr2:=GetMultilevelPointer(ph,[CheckBase+Offset11,0x8fc,0xb04])
+   EnemyNamePtr2:=GetMultilevelPointer(ph,[CheckBase+Offset11,0x8fc,0xb00])
    EnemyName2:=ReadMemStr(ph,EnemyNamePtr2+0x32,70,"UTF-16")
    PlayerStats.EnemyName2:=EnemyName2
 

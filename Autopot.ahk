@@ -1080,9 +1080,9 @@ ReadPlayerStats(hwnd, byRef PlayerStats)
    PlayerStats.PanelSkillTree:=ReadMemUInt(pH,PanelSkillTreeOffset+0x7d4)
    PanelWaypointOffset:=ReadMemUInt(pH,CheckBase+Offset8+0x28)
    PlayerStats.PanelWaypoint:=ReadMemUInt(pH,PanelWaypointOffset+0x7d4)
-   MouseOnEnemyOffset:=ReadMemUInt(pH,CheckBase+Offset8+0xb4)
+   MouseOnEnemyOffset:=ReadMemUInt(pH,CheckBase+Offset8+0xb8)
    PlayerStats.MouseOnEnemyStatus:=ReadMemUInt(pH,MouseOnEnemyOffset+0x7d4)
-   PanelInstanceManagerOffset:=ReadMemUInt(pH,CheckBase+Offset8+0xD0)  ;added by immor
+   PanelInstanceManagerOffset:=ReadMemUInt(pH,CheckBase+Offset8+0xD4)  ;added by immor
    PlayerStats.PanelInstanceManager:=ReadMemUInt(pH,PanelInstanceManagerOffset+0x7d4) ;added by immor
    InCityOffset:=GetMultilevelPointer(pH,[CheckBase+Offset10,0x708,0x284])
    PlayerStats.InCity:=ReadMemUInt(pH,InCityOffset+0x7d4)

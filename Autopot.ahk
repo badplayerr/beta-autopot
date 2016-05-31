@@ -2306,19 +2306,23 @@ Main()
       			   break
       			}
       		}
-      		If ((!WindowQueuedFlaskEffects[k].HasKey("GraniteQueueEndtime")) || (A_TickCount>=(WindowQueuedFlaskEffects[k].GraniteQueueEndtime-lagCompensation)))
-      		{
-      			flaskNum:=GetMaxChargesFlaskOfType(FlasksData,"FlaskUtility5") ; Granite Flask
-      			If (flaskNum!="")
-      			{
-      				EffectDuration:=FlasksData[flaskNum].EffectDuration
-      				WindowQueuedFlaskEffects[k].GraniteQueueEndtime:=A_TickCount+EffectDuration*100
-      				If (trayNotIfications)
-      				{
-      					TrayTip, PoE AutoFlask Using Granite Flask %flaskNum%, %A_Space% , 2
-      				}
-      				hKey:=FlaskHotkey%flaskNum%
-      				IfWinActive Path of Exile ahk_class Direct3DWindowClass
+      		            If ((!WindowQueuedFlaskEffects[k].HasKey("GraniteQueueEndtime")) || (A_TickCount>=(WindowQueuedFlaskEffects[k].GraniteQueueEndtime-lagCompensation)))
+            {
+               flaskNum:=GetMaxChargesFlaskOfType(FlasksData,"FlaskUtility1") ; Basalt Flask
+               If (flaskNum = "")
+               {
+                  flaskNum:=GetMaxChargesFlaskOfType(FlasksData,"FlaskUtility5") ; Granite Flask
+               }     
+               If (flaskNum!="")
+               {
+                  EffectDuration:=FlasksData[flaskNum].EffectDuration
+                  WindowQueuedFlaskEffects[k].GraniteQueueEndtime:=A_TickCount+EffectDuration*100
+                  If (trayNotIfications)
+                  {
+                     TrayTip, PoE AutoFlask Using Granite/Basalt Flask %flaskNum%, %A_Space% , 2
+                  }
+                  hKey:=FlaskHotkey%flaskNum%
+                  IfWinActive Path of Exile ahk_class Direct3DWindowClass
                   {
                      Sendinput, %hkey% Down}
                      Sendinput, %hkey% Up}
@@ -2327,10 +2331,10 @@ Main()
                   {
                      ControlSend,,%hkey% Down %hkey% Up}, % "ahk_id" hwnd
                   }
-      				break
-      			}
-      		}
-      	}
+                  break
+               }
+            }
+         }
 
       	If (currLifeRatio<CurrentConfig.minLifeRatioToPopElementalResist || currEShieldRatio<CurrentConfig.minEShieldRatioToPopElementalResist)
       	{

@@ -995,14 +995,14 @@ ReadPlayerStats(hwnd, byRef PlayerStats)
    Else If (GlobalS)
    {
       global Offset1:=0x138
-      global Offset2:=0x4b8
+      global Offset2:=0x4c4
       global Offset3:=0x13c
       global Offset4:=0x220
-      global Offset5:=0x34b4
+      global Offset5:=0x36b4
       global Offset6:=0x1588
       global Offset7:=0x158c
-      global Offset8:=0x100
-      global Offset9:=0xE4
+      global Offset8:=0xa24
+      global Offset9:=0x9cc
       global Offset10:=0x12c
       global Offset11:=0x1b8
    }

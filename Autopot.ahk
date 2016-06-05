@@ -1003,8 +1003,8 @@ ReadPlayerStats(hwnd, byRef PlayerStats)
       global Offset7:=0x158c
       global Offset8:=0xa24
       global Offset9:=0x9cc
-      global Offset10:=0x12c
-      global Offset11:=0x1b8
+      global Offset10:=0xa50
+      global Offset11:=0xab4
    }
    Else If (Singapore)
    {
@@ -1080,16 +1080,16 @@ ReadPlayerStats(hwnd, byRef PlayerStats)
    PlayerStats.PanelSkillTree:=ReadMemUInt(pH,PanelSkillTreeOffset+0x7d4)
    PanelWaypointOffset:=ReadMemUInt(pH,CheckBase+Offset8+0x28)
    PlayerStats.PanelWaypoint:=ReadMemUInt(pH,PanelWaypointOffset+0x7d4)
-   MouseOnEnemyOffset:=ReadMemUInt(pH,CheckBase+Offset8+0xb8)
-   PlayerStats.MouseOnEnemyStatus:=ReadMemUInt(pH,MouseOnEnemyOffset+0x7d4)
    PanelInstanceManagerOffset:=ReadMemUInt(pH,CheckBase+Offset8+0xD4)  ;added by immor
    PlayerStats.PanelInstanceManager:=ReadMemUInt(pH,PanelInstanceManagerOffset+0x7d4) ;added by immor
    InCityOffset:=GetMultilevelPointer(pH,[CheckBase+Offset10,0x708,0x278])
    PlayerStats.InCity:=ReadMemUInt(pH,InCityOffset+0x7d4)
-   EnemyNamePtr:=GetMultilevelPointer(ph,[CheckBase+Offset11,0x8fc,0xb68])
+   MouseOnEnemyOffset:=GetMultilevelPointer(pH,[CheckBase+Offset11,0x8f8,0x834])
+   PlayerStats.MouseOnEnemyStatus:=ReadMemUInt(pH,MouseOnEnemyOffset+0x30)
+   EnemyNamePtr:=GetMultilevelPointer(ph,[CheckBase+Offset11,0x8f8,0xb64])
    EnemyName:=ReadMemStr(ph,EnemyNamePtr,70,"UTF-16")
    PlayerStats.EnemyName:=EnemyName
-   EnemyNamePtr2:=GetMultilevelPointer(ph,[CheckBase+Offset11,0x8fc,0xb00])
+   EnemyNamePtr2:=GetMultilevelPointer(ph,[CheckBase+Offset11,0x8f8,0xafc])
    EnemyName2:=ReadMemStr(ph,EnemyNamePtr2+0x32,70,"UTF-16")
    PlayerStats.EnemyName2:=EnemyName2
 
@@ -2621,7 +2621,7 @@ Main()
 				{
 					If (PlayerStats.PanelWaypoint=65536 && PlayerStats.PanelInventory=65536 && PlayerStats.PanelSkillTree=65536 && PlayerStats.PanelSocial=65536)
 					{
-						If (PlayerStats.MouseOnEnemyStatus!="" && PlayerStats.MouseOnEnemyStatus=65537)
+						If (PlayerStats.MouseOnEnemyStatus!="" && PlayerStats.MouseOnEnemyStatus=4)
 						{
 							If (PlayerStats.ChatStatus!="" && PlayerStats.ChatStatus=65536)
 							{
@@ -3109,11 +3109,11 @@ Main()
             GuiControl,4: , ChatStatusvar , Closed
          }
          MouseOnEnemyStatusvalue:=PlayerStats.MouseOnEnemyStatus
-         If (MouseOnEnemyStatusvalue=65537)
+         If (MouseOnEnemyStatusvalue=4)
          {
             GuiControl,4: , MouseOnEnemyStatusvar , Yes
          }
-         Else If (MouseOnEnemyStatusvalue=65536)
+         Else If (MouseOnEnemyStatusvalue=3)
          {
             GuiControl,4: , MouseOnEnemyStatusvar , No
          }

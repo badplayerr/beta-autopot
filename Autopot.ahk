@@ -966,15 +966,15 @@ ReadPlayerStats(hwnd, byRef PlayerStats)
 
    If (Steam) 
    {
-      global Offset1:=0x150
-      global Offset2:=0x5A0
-      global Offset3:=0x154
+      global Offset1:=0x154
+      global Offset2:=0x4c4
+      global Offset3:=0x158
       global Offset4:=0x220
       global Offset5:=0x2E80
-      global Offset6:=0x15D0
-      global Offset7:=0x15D4
-      global Offset8:=0x100
-      global Offset9:=0xE4
+      global Offset6:=0x15a8
+      global Offset7:=0x15ac
+      global Offset8:=0xa24
+      global Offset9:=0x9cc
       global Offset10:=0x12C
       global Offset11:=0x198
    }
@@ -1084,7 +1084,7 @@ ReadPlayerStats(hwnd, byRef PlayerStats)
    PlayerStats.MouseOnEnemyStatus:=ReadMemUInt(pH,MouseOnEnemyOffset+0x7d4)
    PanelInstanceManagerOffset:=ReadMemUInt(pH,CheckBase+Offset8+0xD4)  ;added by immor
    PlayerStats.PanelInstanceManager:=ReadMemUInt(pH,PanelInstanceManagerOffset+0x7d4) ;added by immor
-   InCityOffset:=GetMultilevelPointer(pH,[CheckBase+Offset10,0x708,0x284])
+   InCityOffset:=GetMultilevelPointer(pH,[CheckBase+Offset10,0x708,0x278])
    PlayerStats.InCity:=ReadMemUInt(pH,InCityOffset+0x7d4)
    EnemyNamePtr:=GetMultilevelPointer(ph,[CheckBase+Offset11,0x8fc,0xb68])
    EnemyName:=ReadMemStr(ph,EnemyNamePtr,70,"UTF-16")

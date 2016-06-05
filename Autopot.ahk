@@ -933,7 +933,7 @@ GetUiBase(hwnd)
    FrameBase:=GetFrameBase(hwnd)
    If (FrameBase="" || FrameBase=0)
       return
-   uiBase:=GetMultilevelPointer(pH,[FrameBase+Offset3,Offset4,0x48])
+   uiBase:=GetMultilevelPointer(pH,[FrameBase+Offset3,Offset4,0x928])
    return uiBase
 }
 
@@ -1107,7 +1107,7 @@ ReadFlasksData(hwnd, byRef FlasksData)
    If (!UiBase) ;not InGame
       return
    
-   FlaskInvBase:=GetMultilevelPointer(pH,[UiBase+0x8ec,0x908,0x20])
+   FlaskInvBase:=GetMultilevelPointer(pH,[UiBase+0x8e8,0x904,0x20])
 
    Loop, 5
    {

@@ -1085,7 +1085,7 @@ ReadPlayerStats(hwnd, byRef PlayerStats)
    InCityOffset:=GetMultilevelPointer(pH,[CheckBase+Offset10,0x708,0x278])
    PlayerStats.InCity:=ReadMemUInt(pH,InCityOffset+0x7d4)
    MouseOnEnemyOffset:=GetMultilevelPointer(pH,[CheckBase+Offset11,0x8f8,0x834])
-   PlayerStats.MouseOnEnemyStatus:=ReadMemUInt(pH,MouseOnEnemyOffset+0x30)
+   PlayerStats.MouseOnEnemyStatus:=ReadMemUInt(pH,MouseOnEnemyOffset+0x38)
    EnemyNamePtr:=GetMultilevelPointer(ph,[CheckBase+Offset11,0x8f8,0xb64])
    EnemyName:=ReadMemStr(ph,EnemyNamePtr,70,"UTF-16")
    PlayerStats.EnemyName:=EnemyName
@@ -4345,7 +4345,7 @@ ReadMe:
 return
 
 Donate:
-   Run "https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=gurud.exe@gmail.com&lc=BR&item_name=MultiScript Support&currency_code=USD&bn=PP-DonationsBF:btn_donateCC_LG.gIf:NonHosted"
+   Run "https://donate.doctorswithoutborders.org/onetime.cfm"
 return
 
 GuiClose:

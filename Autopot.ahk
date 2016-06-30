@@ -890,7 +890,7 @@ GetFrameBase(hwnd)
          ScanBaseMgrPtr(mBase, pH, mSize)
       }
 
-      fB:=GetMultilevelPointer(pH,[mBase+baseMgrPtr,4,0x7C,0x11c])
+      fB:=GetMultilevelPointer(pH,[mBase+baseMgrPtr,4,0xFC,0x11c])
       WindowBasicsCache[k].fBase:=fB
    }
    return fB
@@ -1164,7 +1164,7 @@ ReadFlasksData(hwnd, byRef FlasksData)
          If (FlasksData[A_Index].ChargesCurrent < FlasksData[A_Index].ChargesPerUse) ; not enough charges in this flask to use it, don't bother
             continue
 
-         FlaskMetadataPtr:=GetMultilevelPointer(ph,[currFlaskPtr,0,0xC])
+         FlaskMetadataPtr:=GetMultilevelPointer(ph,[currFlaskPtr,0,0x14])
          FlaskMetadataStr:=ReadMemStr(ph,FlaskMetadataPtr,70,"UTF-16")
          FlaskTypeStr:=SubStr(FlaskMetadataStr,23)
          FlasksData[A_Index].type:=FlaskTypeStr

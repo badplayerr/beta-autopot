@@ -933,7 +933,7 @@ GetUiBase(hwnd)
    FrameBase:=GetFrameBase(hwnd)
    If (FrameBase="" || FrameBase=0)
       return
-   uiBase:=GetMultilevelPointer(pH,[FrameBase+Offset3,Offset4,0x48])
+   uiBase:=GetMultilevelPointer(pH,[FrameBase+Offset3,Offset4,0x928])
    return uiBase
 }
 
@@ -966,15 +966,15 @@ ReadPlayerStats(hwnd, byRef PlayerStats)
 
    If (Steam) 
    {
-      global Offset1:=0x150
-      global Offset2:=0x5A0
-      global Offset3:=0x154
+      global Offset1:=0x154
+      global Offset2:=0x4c4
+      global Offset3:=0x158
       global Offset4:=0x220
       global Offset5:=0x2E80
-      global Offset6:=0x15D0
-      global Offset7:=0x15D4
-      global Offset8:=0x100
-      global Offset9:=0xE4
+      global Offset6:=0x15a8
+      global Offset7:=0x15ac
+      global Offset8:=0xa24
+      global Offset9:=0x9cc
       global Offset10:=0x12C
       global Offset11:=0x198
    }
@@ -995,16 +995,16 @@ ReadPlayerStats(hwnd, byRef PlayerStats)
    Else If (GlobalS)
    {
       global Offset1:=0x138
-      global Offset2:=0x4b8
+      global Offset2:=0x4c4
       global Offset3:=0x13c
       global Offset4:=0x220
-      global Offset5:=0x34b4
+      global Offset5:=0x36b4
       global Offset6:=0x1588
       global Offset7:=0x158c
-      global Offset8:=0x100
-      global Offset9:=0xE4
-      global Offset10:=0x12c
-      global Offset11:=0x1b8
+      global Offset8:=0xa24
+      global Offset9:=0x9cc
+      global Offset10:=0xa50
+      global Offset11:=0xab4
    }
    Else If (Singapore)
    {
@@ -1080,16 +1080,16 @@ ReadPlayerStats(hwnd, byRef PlayerStats)
    PlayerStats.PanelSkillTree:=ReadMemUInt(pH,PanelSkillTreeOffset+0x7d4)
    PanelWaypointOffset:=ReadMemUInt(pH,CheckBase+Offset8+0x28)
    PlayerStats.PanelWaypoint:=ReadMemUInt(pH,PanelWaypointOffset+0x7d4)
-   MouseOnEnemyOffset:=ReadMemUInt(pH,CheckBase+Offset8+0xb8)
-   PlayerStats.MouseOnEnemyStatus:=ReadMemUInt(pH,MouseOnEnemyOffset+0x7d4)
    PanelInstanceManagerOffset:=ReadMemUInt(pH,CheckBase+Offset8+0xD4)  ;added by immor
    PlayerStats.PanelInstanceManager:=ReadMemUInt(pH,PanelInstanceManagerOffset+0x7d4) ;added by immor
-   InCityOffset:=GetMultilevelPointer(pH,[CheckBase+Offset10,0x708,0x284])
+   InCityOffset:=GetMultilevelPointer(pH,[CheckBase+Offset10,0x708,0x278])
    PlayerStats.InCity:=ReadMemUInt(pH,InCityOffset+0x7d4)
-   EnemyNamePtr:=GetMultilevelPointer(ph,[CheckBase+Offset11,0x8fc,0xb68])
+   MouseOnEnemyOffset:=GetMultilevelPointer(pH,[CheckBase+Offset11,0x8f8,0x834])
+   PlayerStats.MouseOnEnemyStatus:=ReadMemUInt(pH,MouseOnEnemyOffset+0x30)
+   EnemyNamePtr:=GetMultilevelPointer(ph,[CheckBase+Offset11,0x8f8,0xb64])
    EnemyName:=ReadMemStr(ph,EnemyNamePtr,70,"UTF-16")
    PlayerStats.EnemyName:=EnemyName
-   EnemyNamePtr2:=GetMultilevelPointer(ph,[CheckBase+Offset11,0x8fc,0xb00])
+   EnemyNamePtr2:=GetMultilevelPointer(ph,[CheckBase+Offset11,0x8f8,0xafc])
    EnemyName2:=ReadMemStr(ph,EnemyNamePtr2+0x32,70,"UTF-16")
    PlayerStats.EnemyName2:=EnemyName2
 
@@ -1107,7 +1107,7 @@ ReadFlasksData(hwnd, byRef FlasksData)
    If (!UiBase) ;not InGame
       return
    
-   FlaskInvBase:=GetMultilevelPointer(pH,[UiBase+0x8ec,0x908,0x20])
+   FlaskInvBase:=GetMultilevelPointer(pH,[UiBase+0x8e8,0x904,0x20])
 
    Loop, 5
    {
@@ -2306,19 +2306,23 @@ Main()
       			   break
       			}
       		}
-      		If ((!WindowQueuedFlaskEffects[k].HasKey("GraniteQueueEndtime")) || (A_TickCount>=(WindowQueuedFlaskEffects[k].GraniteQueueEndtime-lagCompensation)))
-      		{
-      			flaskNum:=GetMaxChargesFlaskOfType(FlasksData,"FlaskUtility5") ; Granite Flask
-      			If (flaskNum!="")
-      			{
-      				EffectDuration:=FlasksData[flaskNum].EffectDuration
-      				WindowQueuedFlaskEffects[k].GraniteQueueEndtime:=A_TickCount+EffectDuration*100
-      				If (trayNotIfications)
-      				{
-      					TrayTip, PoE AutoFlask Using Granite Flask %flaskNum%, %A_Space% , 2
-      				}
-      				hKey:=FlaskHotkey%flaskNum%
-      				IfWinActive Path of Exile ahk_class Direct3DWindowClass
+      		            If ((!WindowQueuedFlaskEffects[k].HasKey("GraniteQueueEndtime")) || (A_TickCount>=(WindowQueuedFlaskEffects[k].GraniteQueueEndtime-lagCompensation)))
+            {
+               flaskNum:=GetMaxChargesFlaskOfType(FlasksData,"FlaskUtility1") ; Basalt Flask
+               If (flaskNum = "")
+               {
+                  flaskNum:=GetMaxChargesFlaskOfType(FlasksData,"FlaskUtility5") ; Granite Flask
+               }     
+               If (flaskNum!="")
+               {
+                  EffectDuration:=FlasksData[flaskNum].EffectDuration
+                  WindowQueuedFlaskEffects[k].GraniteQueueEndtime:=A_TickCount+EffectDuration*100
+                  If (trayNotIfications)
+                  {
+                     TrayTip, PoE AutoFlask Using Granite/Basalt Flask %flaskNum%, %A_Space% , 2
+                  }
+                  hKey:=FlaskHotkey%flaskNum%
+                  IfWinActive Path of Exile ahk_class Direct3DWindowClass
                   {
                      Sendinput, %hkey% Down}
                      Sendinput, %hkey% Up}
@@ -2327,10 +2331,10 @@ Main()
                   {
                      ControlSend,,%hkey% Down %hkey% Up}, % "ahk_id" hwnd
                   }
-      				break
-      			}
-      		}
-      	}
+                  break
+               }
+            }
+         }
 
       	If (currLifeRatio<CurrentConfig.minLifeRatioToPopElementalResist || currEShieldRatio<CurrentConfig.minEShieldRatioToPopElementalResist)
       	{
@@ -2617,7 +2621,7 @@ Main()
 				{
 					If (PlayerStats.PanelWaypoint=65536 && PlayerStats.PanelInventory=65536 && PlayerStats.PanelSkillTree=65536 && PlayerStats.PanelSocial=65536)
 					{
-						If (PlayerStats.MouseOnEnemyStatus!="" && PlayerStats.MouseOnEnemyStatus=65537)
+						If (PlayerStats.MouseOnEnemyStatus!="" && PlayerStats.MouseOnEnemyStatus=4)
 						{
 							If (PlayerStats.ChatStatus!="" && PlayerStats.ChatStatus=65536)
 							{
@@ -3105,11 +3109,11 @@ Main()
             GuiControl,4: , ChatStatusvar , Closed
          }
          MouseOnEnemyStatusvalue:=PlayerStats.MouseOnEnemyStatus
-         If (MouseOnEnemyStatusvalue=65537)
+         If (MouseOnEnemyStatusvalue=4)
          {
             GuiControl,4: , MouseOnEnemyStatusvar , Yes
          }
-         Else If (MouseOnEnemyStatusvalue=65536)
+         Else If (MouseOnEnemyStatusvalue=3)
          {
             GuiControl,4: , MouseOnEnemyStatusvar , No
          }

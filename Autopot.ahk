@@ -771,8 +771,8 @@ PlayerConfig["Default"].FlaskConfig:=[]
 
 WindowQueuedFlaskEffects:=[] ;keyed by "%hwnd%%CurrPid%", hpQueueEndtime, manaQueueEndtime
 
-basePtrAoBArray:=[0x84,0xC9,0x56,0x0F,0x94,0xC1,0x84]
-basePtrAobOffset:=-0x09
+basePtrAoBArray:=[0xCE, 0x50, 0xC7, 0x45, 0xF0]
+basePtrAobOffset:=+0x10
 
 WindowBasicsCache:=[] ; keyed by "%hwnd%%CurrPid%", entries are objects with properties processHandle, moduleBase, moduleSize, baseFramePtr
 
@@ -933,7 +933,7 @@ GetUiBase(hwnd)
    FrameBase:=GetFrameBase(hwnd)
    If (FrameBase="" || FrameBase=0)
       return
-   uiBase:=GetMultilevelPointer(pH,[FrameBase+Offset3,Offset4,0x928])
+   uiBase:=GetMultilevelPointer(pH,[FrameBase+Offset3,Offset4,0x930])
    return uiBase
 }
 
@@ -995,16 +995,16 @@ ReadPlayerStats(hwnd, byRef PlayerStats)
    Else If (GlobalS)
    {
       global Offset1:=0x138
-      global Offset2:=0x4c4
+      global Offset2:=0x144
       global Offset3:=0x13c
       global Offset4:=0x220
-      global Offset5:=0x36b4
-      global Offset6:=0x1588
-      global Offset7:=0x158c
-      global Offset8:=0xa24
-      global Offset9:=0x9cc
-      global Offset10:=0xa50
-      global Offset11:=0xab4
+      global Offset5:=0x38b4
+      global Offset6:=0x158c
+      global Offset7:=0x1590
+      global Offset8:=0xa34
+      global Offset9:=0x9dc
+      global Offset10:=0xa64
+      global Offset11:=0xac8
    }
    Else If (Singapore)
    {
@@ -1080,16 +1080,16 @@ ReadPlayerStats(hwnd, byRef PlayerStats)
    PlayerStats.PanelSkillTree:=ReadMemUInt(pH,PanelSkillTreeOffset+0x7d4)
    PanelWaypointOffset:=ReadMemUInt(pH,CheckBase+Offset8+0x28)
    PlayerStats.PanelWaypoint:=ReadMemUInt(pH,PanelWaypointOffset+0x7d4)
-   PanelInstanceManagerOffset:=ReadMemUInt(pH,CheckBase+Offset8+0xD4)  ;added by immor
+   PanelInstanceManagerOffset:=ReadMemUInt(pH,CheckBase+Offset8+0xB0)  ;added by immor
    PlayerStats.PanelInstanceManager:=ReadMemUInt(pH,PanelInstanceManagerOffset+0x7d4) ;added by immor
-   InCityOffset:=GetMultilevelPointer(pH,[CheckBase+Offset10,0x708,0x278])
+   InCityOffset:=GetMultilevelPointer(pH,[CheckBase+Offset10,0x708,0x288])
    PlayerStats.InCity:=ReadMemUInt(pH,InCityOffset+0x7d4)
-   MouseOnEnemyOffset:=GetMultilevelPointer(pH,[CheckBase+Offset11,0x8f8,0x834])
+   MouseOnEnemyOffset:=GetMultilevelPointer(pH,[CheckBase+Offset11,0x900,0x834])
    PlayerStats.MouseOnEnemyStatus:=ReadMemUInt(pH,MouseOnEnemyOffset+0x38)
-   EnemyNamePtr:=GetMultilevelPointer(ph,[CheckBase+Offset11,0x8f8,0xb64])
+   EnemyNamePtr:=GetMultilevelPointer(ph,[CheckBase+Offset11,0x900,0xb6c])
    EnemyName:=ReadMemStr(ph,EnemyNamePtr,70,"UTF-16")
    PlayerStats.EnemyName:=EnemyName
-   EnemyNamePtr2:=GetMultilevelPointer(ph,[CheckBase+Offset11,0x8f8,0xafc])
+   EnemyNamePtr2:=GetMultilevelPointer(ph,[CheckBase+Offset11,0x900,0xb04])
    EnemyName2:=ReadMemStr(ph,EnemyNamePtr2+0x32,70,"UTF-16")
    PlayerStats.EnemyName2:=EnemyName2
 
@@ -1107,7 +1107,7 @@ ReadFlasksData(hwnd, byRef FlasksData)
    If (!UiBase) ;not InGame
       return
    
-   FlaskInvBase:=GetMultilevelPointer(pH,[UiBase+0x8e8,0x904,0x20])
+   FlaskInvBase:=GetMultilevelPointer(pH,[UiBase+0x8f0,0x98c,0x20])
 
    Loop, 5
    {

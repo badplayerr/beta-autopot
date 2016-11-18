@@ -998,13 +998,13 @@ ReadPlayerStats(hwnd, byRef PlayerStats)
       global Offset2:=0x144
       global Offset3:=0x13c
       global Offset4:=0x220
-      global Offset5:=0x38b4
+      global Offset5:=0x3934
       global Offset6:=0x158c
       global Offset7:=0x1590
-      global Offset8:=0xa34
-      global Offset9:=0x9dc
-      global Offset10:=0xa64
-      global Offset11:=0xac8
+      global Offset8:=0xa00
+      global Offset9:=0x9a8
+      global Offset10:=0xa34
+      global Offset11:=0xa9c
    }
    Else If (Singapore)
    {
@@ -1069,27 +1069,27 @@ ReadPlayerStats(hwnd, byRef PlayerStats)
 
    CheckBase:=GetMultilevelPointer(pH,[fBase+Offset3,Offset4])
 
-   ChatStatusOffset:=GetMultilevelPointer(pH,[CheckBase+Offset9,0x788,0x0])
-   PlayerStats.ChatStatus:=ReadMemUInt(pH,ChatStatusOffset+0x7d4)
+   ChatStatusOffset:=GetMultilevelPointer(pH,[CheckBase+Offset9,0x708,0x0])
+   PlayerStats.ChatStatus:=ReadMemUInt(pH,ChatStatusOffset+0x754)
 
    PanelInventoryOffset:=ReadMemUInt(pH,CheckBase+Offset8)
-   PlayerStats.PanelInventory:=ReadMemUInt(pH,PanelInventoryOffset+0x7d4)
-   PanelSocialOffset:=ReadMemUInt(pH,CheckBase+Offset8+0x10)
-   PlayerStats.PanelSocial:=ReadMemUInt(pH,PanelSocialOffset+0x7d4)
-   PanelSkillTreeOffset:=ReadMemUInt(pH,CheckBase+Offset8+0x14)
-   PlayerStats.PanelSkillTree:=ReadMemUInt(pH,PanelSkillTreeOffset+0x7d4)
-   PanelWaypointOffset:=ReadMemUInt(pH,CheckBase+Offset8+0x28)
-   PlayerStats.PanelWaypoint:=ReadMemUInt(pH,PanelWaypointOffset+0x7d4)
-   PanelInstanceManagerOffset:=ReadMemUInt(pH,CheckBase+Offset8+0xB0)  ;added by immor
-   PlayerStats.PanelInstanceManager:=ReadMemUInt(pH,PanelInstanceManagerOffset+0x7d4) ;added by immor
-   InCityOffset:=GetMultilevelPointer(pH,[CheckBase+Offset10,0x708,0x288])
-   PlayerStats.InCity:=ReadMemUInt(pH,InCityOffset+0x7d4)
-   MouseOnEnemyOffset:=GetMultilevelPointer(pH,[CheckBase+Offset11,0x900,0x834])
+   PlayerStats.PanelInventory:=ReadMemUInt(pH,PanelInventoryOffset+0x754)
+   PanelSocialOffset:=ReadMemUInt(pH,CheckBase+Offset8+0x14)
+   PlayerStats.PanelSocial:=ReadMemUInt(pH,PanelSocialOffset+0x754)
+   PanelSkillTreeOffset:=ReadMemUInt(pH,CheckBase+Offset8+0x18)
+   PlayerStats.PanelSkillTree:=ReadMemUInt(pH,PanelSkillTreeOffset+0x754)
+   PanelWaypointOffset:=ReadMemUInt(pH,CheckBase+Offset8+0x30)
+   PlayerStats.PanelWaypoint:=ReadMemUInt(pH,PanelWaypointOffset+0x754)
+   PanelInstanceManagerOffset:=ReadMemUInt(pH,CheckBase+Offset8+0xB8)  ;added by immor
+   PlayerStats.PanelInstanceManager:=ReadMemUInt(pH,PanelInstanceManagerOffset+0x754) ;added by immor
+   InCityOffset:=GetMultilevelPointer(pH,[CheckBase+Offset10,0x704,0x958])
+   PlayerStats.InCity:=ReadMemUInt(pH,InCityOffset+0x754)
+   MouseOnEnemyOffset:=GetMultilevelPointer(pH,[CheckBase+Offset11,0x8c4,0x7f4])
    PlayerStats.MouseOnEnemyStatus:=ReadMemUInt(pH,MouseOnEnemyOffset+0x38)
-   EnemyNamePtr:=GetMultilevelPointer(ph,[CheckBase+Offset11,0x900,0xb6c])
+   EnemyNamePtr:=GetMultilevelPointer(ph,[CheckBase+Offset11,0x8c4,0xb30])
    EnemyName:=ReadMemStr(ph,EnemyNamePtr,70,"UTF-16")
    PlayerStats.EnemyName:=EnemyName
-   EnemyNamePtr2:=GetMultilevelPointer(ph,[CheckBase+Offset11,0x900,0xb04])
+   EnemyNamePtr2:=GetMultilevelPointer(ph,[CheckBase+Offset11,0x8c4,0xac8])
    EnemyName2:=ReadMemStr(ph,EnemyNamePtr2+0x32,70,"UTF-16")
    PlayerStats.EnemyName2:=EnemyName2
 

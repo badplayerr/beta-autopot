@@ -933,7 +933,7 @@ GetUiBase(hwnd)
    FrameBase:=GetFrameBase(hwnd)
    If (FrameBase="" || FrameBase=0)
       return
-   uiBase:=GetMultilevelPointer(pH,[FrameBase+Offset3,Offset4,0x930])
+   uiBase:=GetMultilevelPointer(pH,[FrameBase+Offset3,Offset4,0x8f4])
    return uiBase
 }
 
@@ -1107,7 +1107,7 @@ ReadFlasksData(hwnd, byRef FlasksData)
    If (!UiBase) ;not InGame
       return
    
-   FlaskInvBase:=GetMultilevelPointer(pH,[UiBase+0x8f0,0x98c,0x20])
+   FlaskInvBase:=GetMultilevelPointer(pH,[UiBase+0x8b4,0x950,0x20])
 
    Loop, 5
    {
@@ -1785,8 +1785,8 @@ Main()
 			}
 			Else If (autoQuitMode=3)
 			{
-            WinActivate Path of Exile ahk_class Direct3DWindowClass
-				IfWinActive Path of Exile ahk_class Direct3DWindowClass
+            WinActivate Path of Exile ahk_class POEWindowClass
+				IfWinActive Path of Exile ahk_class POEWindowClass
             {
                SendInput {ALT Down}
                SendInput {F4}
@@ -1902,7 +1902,7 @@ Main()
 								TrayTip, PoE AutoFlask Using "of Heat" flask %flaskNum%, %A_Space% , 2
 							}
 							hKey:=FlaskHotkey%flaskNum%
-							IfWinActive Path of Exile ahk_class Direct3DWindowClass
+							IfWinActive Path of Exile ahk_class POEWindowClass
                      {
                         Sendinput, %hkey% Down}
                         Sendinput, %hkey% Up}
@@ -1941,7 +1941,7 @@ Main()
 								TrayTip, PoE AutoFlask Using "of Grounding" flask %flaskNum%, %A_Space% , 2
 							}
 							hKey:=FlaskHotkey%flaskNum%
-							IfWinActive Path of Exile ahk_class Direct3DWindowClass
+							IfWinActive Path of Exile ahk_class POEWindowClass
                      {
                         Sendinput, %hkey% Down}
                         Sendinput, %hkey% Up}
@@ -1980,7 +1980,7 @@ Main()
 								TrayTip, PoE AutoFlask Using "of Dousing" flask %flaskNum%, %A_Space% , 2
 							}
 							hKey:=FlaskHotkey%flaskNum%
-							IfWinActive Path of Exile ahk_class Direct3DWindowClass
+							IfWinActive Path of Exile ahk_class POEWindowClass
                      {
                         Sendinput, %hkey% Down}
                         Sendinput, %hkey% Up}
@@ -2019,7 +2019,7 @@ Main()
                         TrayTip, PoE AutoFlask Using "of Warding" flask %flaskNum%, %A_Space% , 2
                      }
                      hKey:=FlaskHotkey%flaskNum%
-                     IfWinActive Path of Exile ahk_class Direct3DWindowClass
+                     IfWinActive Path of Exile ahk_class POEWindowClass
                      {
                         Sendinput, %hkey% Down}
                         Sendinput, %hkey% Up}
@@ -2060,7 +2060,7 @@ Main()
                         TrayTip, PoE AutoFlask Using "of Staunching" flask %flaskNum%, %A_Space% , 2
                      }
                      hKey:=FlaskHotkey%flaskNum%
-                     IfWinActive Path of Exile ahk_class Direct3DWindowClass
+                     IfWinActive Path of Exile ahk_class POEWindowClass
                      {
                         Sendinput, %hkey% Down}
                         Sendinput, %hkey% Up}
@@ -2099,7 +2099,7 @@ Main()
                         TrayTip, PoE AutoFlask Using "of Staunching" flask %flaskNum%, %A_Space% , 2
                      }
                      hKey:=FlaskHotkey%flaskNum%
-                     IfWinActive Path of Exile ahk_class Direct3DWindowClass
+                     IfWinActive Path of Exile ahk_class POEWindowClass
                      {
                         Sendinput, %hkey% Down}
                         Sendinput, %hkey% Up}
@@ -2187,7 +2187,7 @@ Main()
                      TrayTip, PoE AutoFlask Using HP Flask %flaskNum%, %A_Space% , 2
                   }
                   hKey:=FlaskHotkey%flaskNum%
-                  IfWinActive Path of Exile ahk_class Direct3DWindowClass
+                  IfWinActive Path of Exile ahk_class POEWindowClass
                   {
                      Sendinput, %hkey% Down}
                      Sendinput, %hkey% Up}
@@ -2266,7 +2266,7 @@ Main()
       					TrayTip, PoE AutoFlask Using HP flask %flaskNum%, %A_Space% , 2
       				}
       				hKey:=FlaskHotkey%flaskNum%
-      				IfWinActive Path of Exile ahk_class Direct3DWindowClass
+      				IfWinActive Path of Exile ahk_class POEWindowClass
                   {
                      Sendinput, %hkey% Down}
                      Sendinput, %hkey% Up}
@@ -2294,7 +2294,7 @@ Main()
       			      TrayTip, PoE AutoFlask Using Jade Flask %flaskNum%, %A_Space% , 2
       			   }
       			   hKey:=FlaskHotkey%flaskNum%
-      			   IfWinActive Path of Exile ahk_class Direct3DWindowClass
+      			   IfWinActive Path of Exile ahk_class POEWindowClass
                   {
                      Sendinput, %hkey% Down}
                      Sendinput, %hkey% Up}
@@ -2322,7 +2322,7 @@ Main()
                      TrayTip, PoE AutoFlask Using Granite/Basalt Flask %flaskNum%, %A_Space% , 2
                   }
                   hKey:=FlaskHotkey%flaskNum%
-                  IfWinActive Path of Exile ahk_class Direct3DWindowClass
+                  IfWinActive Path of Exile ahk_class POEWindowClass
                   {
                      Sendinput, %hkey% Down}
                      Sendinput, %hkey% Up}
@@ -2350,7 +2350,7 @@ Main()
       					TrayTip, PoE AutoFlask Using Ruby Flask %flaskNum%, %A_Space% , 2
       				}
       				hKey:=FlaskHotkey%flaskNum%
-      				IfWinActive Path of Exile ahk_class Direct3DWindowClass
+      				IfWinActive Path of Exile ahk_class POEWindowClass
                   {
                      Sendinput, %hkey% Down}
                      Sendinput, %hkey% Up}
@@ -2375,7 +2375,7 @@ Main()
       					TrayTip, PoE AutoFlask Using Topaz Flask %flaskNum%, %A_Space% , 2
       				}
       				hKey:=FlaskHotkey%flaskNum%
-      				IfWinActive Path of Exile ahk_class Direct3DWindowClass
+      				IfWinActive Path of Exile ahk_class POEWindowClass
                   {
                      Sendinput, %hkey% Down}
                      Sendinput, %hkey% Up}
@@ -2400,7 +2400,7 @@ Main()
       					TrayTip, PoE AutoFlask Using Sapphire flask %flaskNum%, %A_Space% , 2
       				}
       				hKey:=FlaskHotkey%flaskNum%
-      				IfWinActive Path of Exile ahk_class Direct3DWindowClass
+      				IfWinActive Path of Exile ahk_class POEWindowClass
                   {
                      Sendinput, %hkey% Down}
                      Sendinput, %hkey% Up}
@@ -2425,7 +2425,7 @@ Main()
       					TrayTip, PoE AutoFlask Using Amethyst Flask %flaskNum%, %A_Space% , 2
       				}
       				hKey:=FlaskHotkey%flaskNum%
-      				IfWinActive Path of Exile ahk_class Direct3DWindowClass
+      				IfWinActive Path of Exile ahk_class POEWindowClass
                   {
                      Sendinput, %hkey% Down}
                      Sendinput, %hkey% Up}
@@ -2506,7 +2506,7 @@ Main()
       					TrayTip, PoE AutoFlask Using Mana Flask %flaskNum%, %A_Space% , 2
       				}
       				hKey:=FlaskHotkey%flaskNum%
-      				IfWinActive Path of Exile ahk_class Direct3DWindowClass
+      				IfWinActive Path of Exile ahk_class POEWindowClass
                   {
                      Sendinput, %hkey% Down}
                      Sendinput, %hkey% Up}
@@ -2551,7 +2551,7 @@ Main()
 											TrayTip, PoE AutoFlask Using QuickSilver Flask %flaskNum%, %A_Space% , 2
 										}
 										hKey:=FlaskHotkey%flaskNum%
-										IfWinActive Path of Exile ahk_class Direct3DWindowClass
+										IfWinActive Path of Exile ahk_class POEWindowClass
                               {
                                  Sendinput, %hkey% Down}
                                  Sendinput, %hkey% Up}
@@ -2594,7 +2594,7 @@ Main()
 											TrayTip, PoE AutoFlask Using QuickSilver flask %flaskNum%, %A_Space% , 2
 										}
 										hKey:=FlaskHotkey%flaskNum%
-										IfWinActive Path of Exile ahk_class Direct3DWindowClass
+										IfWinActive Path of Exile ahk_class POEWindowClass
                               {
                                  Sendinput, %hkey% Down}
                                  Sendinput, %hkey% Up}
@@ -2635,7 +2635,7 @@ Main()
 										}
 										Else
 										{
-											IfWinActive Path of Exile ahk_class Direct3DWindowClass
+											IfWinActive Path of Exile ahk_class POEWindowClass
 											{
                                     GetKeyState, stateSH, %AttackInPlaceKey%
                                     If stateSH = U
@@ -2706,7 +2706,7 @@ Main()
                {
                   If (LeavingArea=0)
                   {
-                     IfWinActive Path of Exile ahk_class Direct3DWindowClass
+                     IfWinActive Path of Exile ahk_class POEWindowClass
                      {
                         GetKeyState, stateRCtrl, RCtrl
                         If stateRCtrl = U
@@ -2777,7 +2777,7 @@ Main()
             {
                If (PlayerStats.PanelWaypoint=65536 && PlayerStats.PanelInventory=65536 && PlayerStats.PanelSkillTree=65536 && PlayerStats.PanelSocial=65536)
                   {
-                  IfWinActive Path of Exile ahk_class Direct3DWindowClass
+                  IfWinActive Path of Exile ahk_class POEWindowClass
                   {
                      SendInput {NumpadEnter}/oos{NumpadEnter}
                   }
@@ -2803,7 +2803,7 @@ Main()
             {
                If (PlayerStats.PanelWaypoint=65536 && PlayerStats.PanelInventory=65536 && PlayerStats.PanelSkillTree=65536 && PlayerStats.PanelSocial=65536)
                {
-                  IfWinActive Path of Exile ahk_class Direct3DWindowClass
+                  IfWinActive Path of Exile ahk_class POEWindowClass
                   {
                      SendInput {NumpadEnter}/remaining{NumpadEnter}
                   }
@@ -2830,7 +2830,7 @@ Main()
             {
                If (PlayerStats.PanelWaypoint=65536 && PlayerStats.PanelInventory=65536 && PlayerStats.PanelSkillTree=65536 && PlayerStats.PanelSocial=65536)
                {
-                  IfWinActive Path of Exile ahk_class Direct3DWindowClass
+                  IfWinActive Path of Exile ahk_class POEWindowClass
                   {
                      SendInput {NumpadEnter}/hideout{NumpadEnter}
                   }
@@ -2860,7 +2860,7 @@ Main()
          {
             If (IsInGame(hwnd))
             {
-               IfWinActive Path of Exile ahk_class Direct3DWindowClass
+               IfWinActive Path of Exile ahk_class POEWindowClass
                {
                   ResyncTimer:= 0
                   TradeSpam:= 0
@@ -2910,7 +2910,7 @@ Main()
                { 
                   If (PlayerStats.PanelWaypoint=65536 && PlayerStats.PanelInventory=65536 && PlayerStats.PanelSkillTree=65536 && PlayerStats.PanelSocial=65536)
                   {
-                     IfWinActive Path of Exile ahk_class Direct3DWindowClass
+                     IfWinActive Path of Exile ahk_class POEWindowClass
                      {
                         SendMode Input
                         GetKeyState, stateSH, SHIfT
@@ -3011,7 +3011,7 @@ Main()
                   {
                      If (PlayerStats.PanelWaypoint=65536 && PlayerStats.PanelInventory=65536 && PlayerStats.PanelSkillTree=65536 && PlayerStats.PanelSocial=65536)
                      {
-                        IfWinActive Path of Exile ahk_class Direct3DWindowClass
+                        IfWinActive Path of Exile ahk_class POEWindowClass
                         {
                            GetKeyState, stateSH, SHIfT
                            If stateSH = D
@@ -3037,7 +3037,7 @@ Main()
                   {
                      If (PlayerStats.PanelWaypoint=65536 && PlayerStats.PanelInventory=65536 && PlayerStats.PanelSkillTree=65536 && PlayerStats.PanelSocial=65536)
                      {
-                        IfWinActive Path of Exile ahk_class Direct3DWindowClass
+                        IfWinActive Path of Exile ahk_class POEWindowClass
                         {
                            GetKeyState, stateSH, SHIfT
                            If stateSH = D
@@ -3241,7 +3241,7 @@ Main()
 
 UsePortal()
 {
-   IfWinActive Path of Exile ahk_class Direct3DWindowClass
+   IfWinActive Path of Exile ahk_class POEWindowClass
    {
       BlockInput On
       SendMode Input
@@ -3401,7 +3401,7 @@ UsePortal()
 Toggle_Window(window)
 {
    global ClientX, ClientY, ClientW, ClientH
-   IfWinActive Path of Exile ahk_class Direct3DWindowClass
+   IfWinActive Path of Exile ahk_class POEWindowClass
    {
       WinGet, S, Style, % "ahk_id " window   ; Get the style of the window
       If (S & +0x840000)      ; If not borderless
@@ -3440,7 +3440,7 @@ ClipCursor( Confine=True, x1=0 , y1=0, x2=1, y2=1 )
 Webgrab()
 {
    global Rarity
-   IfWinActive Path of Exile ahk_class Direct3DWindowClass
+   IfWinActive Path of Exile ahk_class POEWindowClass
    {
       SendMode Input
       clipboard =  ; Start off empty to allow ClipWait to detect when the text has arrived.
@@ -3528,7 +3528,7 @@ Webgrab()
 
 PortalInvCheck()
 {
-IfWinActive Path of Exile ahk_class Direct3DWindowClass
+IfWinActive Path of Exile ahk_class POEWindowClass
 {
          SendMode Input
          clipboard =  ; Start off empty to allow ClipWait to detect when the text has arrived.
@@ -4391,8 +4391,8 @@ DoHotkey5:
 			}
 			Else If (autoQuitMode=3)
 			{
-            WinActivate Path of Exile ahk_class Direct3DWindowClass
-				IfWinActive Path of Exile ahk_class Direct3DWindowClass
+            WinActivate Path of Exile ahk_class POEWindowClass
+				IfWinActive Path of Exile ahk_class POEWindowClass
             {
                SendInput {ALT Down}
                SendInput {F4}
@@ -5110,7 +5110,7 @@ DPSCalc()
    Global DPS
    If DPS
    return
-   IfWinActive Path of Exile ahk_class Direct3DWindowClass
+   IfWinActive Path of Exile ahk_class POEWindowClass
    {
       SendMode Input
       clipboard =  ; Start off empty to allow ClipWait to detect when the text has arrived.

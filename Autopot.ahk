@@ -890,7 +890,7 @@ GetFrameBase(hwnd)
          ScanBaseMgrPtr(mBase, pH, mSize)
       }
 
-      fB:=GetMultilevelPointer(pH,[mBase+baseMgrPtr,4,0xFC,0x11c])
+      fB:=GetMultilevelPointer(pH,[mBase+baseMgrPtr,4,0xFC,0x1c])
       WindowBasicsCache[k].fBase:=fB
    }
    return fB

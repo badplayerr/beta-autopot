@@ -1169,7 +1169,7 @@ ReadFlasksData(hwnd, byRef FlasksData)
          FlaskTypeStr:=SubStr(FlaskMetadataStr,23)
          FlasksData[A_Index].type:=FlaskTypeStr
 
-         FlaskLocalstatsPtr:=GetMultilevelPointer(ph,[currFlaskPtr,4,0x18,0x1c,0xC])
+         FlaskLocalstatsPtr:=GetMultilevelPointer(ph,[currFlaskPtr,4,0x18,0x14,0xC])
          
          If InStr(FlaskTypeStr, "FlaskLife")
          {

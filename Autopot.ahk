@@ -933,7 +933,7 @@ GetUiBase(hwnd)
    FrameBase:=GetFrameBase(hwnd)
    If (FrameBase="" || FrameBase=0)
       return
-   uiBase:=GetMultilevelPointer(pH,[FrameBase+Offset3,Offset4,0x8f4])
+   uiBase:=GetMultilevelPointer(pH,[FrameBase+Offset3,Offset4,0x8f8])
    return uiBase
 }
 

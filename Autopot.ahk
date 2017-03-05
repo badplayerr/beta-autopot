@@ -1001,9 +1001,9 @@ ReadPlayerStats(hwnd, byRef PlayerStats)
       global Offset5:=0x3934
       global Offset6:=0x158c
       global Offset7:=0x1590
-      global Offset8:=0xa00
-      global Offset9:=0x9a8
-      global Offset10:=0xa34
+      global Offset8:=0xa04
+      global Offset9:=0x9ac
+      global Offset10:=0xa38
       global Offset11:=0xa9c
    }
    Else If (Singapore)

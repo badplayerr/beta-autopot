@@ -2621,7 +2621,7 @@ Main()
 				{
 					If (PlayerStats.PanelWaypoint=65536 && PlayerStats.PanelInventory=65536 && PlayerStats.PanelSkillTree=65536 && PlayerStats.PanelSocial=65536)
 					{
-						If (PlayerStats.MouseOnEnemyStatus!="" && PlayerStats.MouseOnEnemyStatus=4)
+						If (PlayerStats.MouseOnEnemyStatus!="" && PlayerStats.MouseOnEnemyStatus=7)
 						{
 							If (PlayerStats.ChatStatus!="" && PlayerStats.ChatStatus=65536)
 							{
@@ -3109,11 +3109,11 @@ Main()
             GuiControl,4: , ChatStatusvar , Closed
          }
          MouseOnEnemyStatusvalue:=PlayerStats.MouseOnEnemyStatus
-         If (MouseOnEnemyStatusvalue=4)
+         If (MouseOnEnemyStatusvalue=7)
          {
             GuiControl,4: , MouseOnEnemyStatusvar , Yes
          }
-         Else If (MouseOnEnemyStatusvalue=3)
+         Else If (MouseOnEnemyStatusvalue=6)
          {
             GuiControl,4: , MouseOnEnemyStatusvar , No
          }

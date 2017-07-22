@@ -1,4 +1,4 @@
-;██████╗ ██╗   ██╗     ██████╗ ██╗   ██╗██████╗ ██╗   ██╗██████╗ 
+﻿;██████╗ ██╗   ██╗     ██████╗ ██╗   ██╗██████╗ ██╗   ██╗██████╗ 
 ;██╔══██╗╚██╗ ██╔╝    ██╔════╝ ██║   ██║██╔══██╗██║   ██║██╔══██╗
 ;██████╔╝ ╚████╔╝     ██║  ███╗██║   ██║██████╔╝██║   ██║██║  ██║
 ;██╔══██╗  ╚██╔╝      ██║   ██║██║   ██║██╔══██╗██║   ██║██║  ██║
@@ -933,7 +933,7 @@ GetUiBase(hwnd)
    FrameBase:=GetFrameBase(hwnd)
    If (FrameBase="" || FrameBase=0)
       return
-   uiBase:=GetMultilevelPointer(pH,[FrameBase+Offset3,Offset4,0x8f8])
+   uiBase:=GetMultilevelPointer(pH,[FrameBase+Offset3,Offset4,0x8FC])
    return uiBase
 }
 
@@ -999,11 +999,11 @@ ReadPlayerStats(hwnd, byRef PlayerStats)
       global Offset3:=0x13c
       global Offset4:=0x220
       global Offset5:=0x3934
-      global Offset6:=0x158c
-      global Offset7:=0x1590
-      global Offset8:=0xa04
-      global Offset9:=0x9ac
-      global Offset10:=0xa38
+      global Offset6:=0x15A4
+      global Offset7:=0x15A8
+      global Offset8:=0xa10
+      global Offset9:=0x9B8
+      global Offset10:=0xa4C
       global Offset11:=0xaa0
    }
    Else If (Singapore)
@@ -1074,15 +1074,15 @@ ReadPlayerStats(hwnd, byRef PlayerStats)
 
    PanelInventoryOffset:=ReadMemUInt(pH,CheckBase+Offset8)
    PlayerStats.PanelInventory:=ReadMemUInt(pH,PanelInventoryOffset+0x754)
-   PanelSocialOffset:=ReadMemUInt(pH,CheckBase+Offset8+0x14)
+   PanelSocialOffset:=ReadMemUInt(pH,CheckBase+0xA24)
    PlayerStats.PanelSocial:=ReadMemUInt(pH,PanelSocialOffset+0x754)
-   PanelSkillTreeOffset:=ReadMemUInt(pH,CheckBase+Offset8+0x18)
+   PanelSkillTreeOffset:=ReadMemUInt(pH,CheckBase+0xA28)
    PlayerStats.PanelSkillTree:=ReadMemUInt(pH,PanelSkillTreeOffset+0x754)
-   PanelWaypointOffset:=ReadMemUInt(pH,CheckBase+Offset8+0x30)
+   PanelWaypointOffset:=ReadMemUInt(pH,CheckBase+0xA40)
    PlayerStats.PanelWaypoint:=ReadMemUInt(pH,PanelWaypointOffset+0x754)
    PanelInstanceManagerOffset:=ReadMemUInt(pH,CheckBase+Offset8+0xB8)  ;added by immor
    PlayerStats.PanelInstanceManager:=ReadMemUInt(pH,PanelInstanceManagerOffset+0x754) ;added by immor
-   InCityOffset:=GetMultilevelPointer(pH,[CheckBase+Offset10,0x704,0x958])
+   InCityOffset:=GetMultilevelPointer(pH,[CheckBase+Offset10,0x954])
    PlayerStats.InCity:=ReadMemUInt(pH,InCityOffset+0x754)
    MouseOnEnemyOffset:=GetMultilevelPointer(pH,[CheckBase+Offset11,0x8c4,0x7f4])
    PlayerStats.MouseOnEnemyStatus:=ReadMemUInt(pH,MouseOnEnemyOffset+0x38)
@@ -1107,7 +1107,7 @@ ReadFlasksData(hwnd, byRef FlasksData)
    If (!UiBase) ;not InGame
       return
    
-   FlaskInvBase:=GetMultilevelPointer(pH,[UiBase+0x8b4,0x950,0x20])
+   FlaskInvBase:=GetMultilevelPointer(pH,[UiBase+0x8B8,0x958,0x20])
 
    Loop, 5
    {

@@ -4345,7 +4345,7 @@ ReadMe:
 return
 
 Donate:
-   Run "https://donate.doctorswithoutborders.org/onetime.cfm"
+   Run "https://paypal.me/yuwei1"
 return
 
 GuiClose:

@@ -1,4 +1,4 @@
-;██████╗ ██╗   ██╗     ██████╗ ██╗   ██╗██████╗ ██╗   ██╗██████╗ 
+﻿;██████╗ ██╗   ██╗     ██████╗ ██╗   ██╗██████╗ ██╗   ██╗██████╗ 
 ;██╔══██╗╚██╗ ██╔╝    ██╔════╝ ██║   ██║██╔══██╗██║   ██║██╔══██╗
 ;██████╔╝ ╚████╔╝     ██║  ███╗██║   ██║██████╔╝██║   ██║██║  ██║
 ;██╔══██╗  ╚██╔╝      ██║   ██║██║   ██║██╔══██╗██║   ██║██║  ██║
@@ -771,8 +771,8 @@ PlayerConfig["Default"].FlaskConfig:=[]
 
 WindowQueuedFlaskEffects:=[] ;keyed by "%hwnd%%CurrPid%", hpQueueEndtime, manaQueueEndtime
 
-basePtrAoBArray:=[0xCE, 0x50, 0xC7, 0x45, 0xF0]
-basePtrAobOffset:=+0x10
+basePtrAoBArray := [0x8B, 0x35, "?", "?", "?", "?", 0xA3, "?", "?", "?", "?", 0x85, 0xF6, 0x74, 0x15, 0x8B, 0xCE, 0xE8, "?", "?", "?", "?", 0x68, "?", "?", "?", "?", 0x56, 0xE8, "?", "?", "?", "?", 0x83, 0xc4, 0x08, 0xC6]
+basePtrAobOffset := 0x02
 
 WindowBasicsCache:=[] ; keyed by "%hwnd%%CurrPid%", entries are objects with properties processHandle, moduleBase, moduleSize, baseFramePtr
 
@@ -933,7 +933,7 @@ GetUiBase(hwnd)
    FrameBase:=GetFrameBase(hwnd)
    If (FrameBase="" || FrameBase=0)
       return
-   uiBase:=GetMultilevelPointer(pH,[FrameBase+Offset3,Offset4,0x8f8])
+   uiBase:=GetMultilevelPointer(pH,[FrameBase+Offset3,Offset4,0x938])
    return uiBase
 }
 
@@ -966,17 +966,17 @@ ReadPlayerStats(hwnd, byRef PlayerStats)
 
    If (Steam) 
    {
-      global Offset1:=0x154
-      global Offset2:=0x4c4
-      global Offset3:=0x158
+      global Offset1:=0x140
+      global Offset2:=0x158
+      global Offset3:=0x144
       global Offset4:=0x220
-      global Offset5:=0x2E80
-      global Offset6:=0x15a8
-      global Offset7:=0x15ac
-      global Offset8:=0xa24
-      global Offset9:=0x9cc
-      global Offset10:=0x12C
-      global Offset11:=0x198
+      global Offset5:=0x3934
+      global Offset6:=0x158c
+      global Offset7:=0x1590
+      global Offset8:=0xa58
+      global Offset9:=0x9fc
+      global Offset10:=0xa38
+      global Offset11:=0xaa0
    }
    Else If (Taiwan)
    {
@@ -994,17 +994,17 @@ ReadPlayerStats(hwnd, byRef PlayerStats)
    }
    Else If (GlobalS)
    {
-      global Offset1:=0x138
-      global Offset2:=0x144
-      global Offset3:=0x13c
-      global Offset4:=0x220
-      global Offset5:=0x3934
-      global Offset6:=0x158c
-      global Offset7:=0x1590
-      global Offset8:=0xa04
-      global Offset9:=0x9ac
-      global Offset10:=0xa38
-      global Offset11:=0xaa0
+      global Offset1:=0x1C0
+      global Offset2:=0x288
+      global Offset3:=0x1C4
+      global Offset4:=0x224
+      global Offset5:=0x4A38
+      global Offset6:=0x17E4
+      global Offset7:=0x17E8
+      global Offset8:=0xA84
+      global Offset9:=0xA04
+      global Offset10:=0x12C
+      global Offset11:=0x198
    }
    Else If (Singapore)
    {
@@ -1029,16 +1029,16 @@ ReadPlayerStats(hwnd, byRef PlayerStats)
    ;PlayerStats.ConfigPath:=ReadMemStr(ph,Config+0xa4,255,"UTF-16")
    PlayerMain:=ReadMemUInt(pH,PlayerBase+4)
    PlayerStatsOffset:=ReadMemUInt(pH,PlayerMain+0xC)
-   PlayerStats.MaxHP:=ReadMemUInt(pH,PlayerStatsOffset+0x2c)
-   PlayerStats.CurrHP:=ReadMemUInt(pH,PlayerStatsOffset+0x30)  
-   PlayerStats.ReservedHPFlat:=ReadMemUInt(pH,PlayerStatsOffset+0x38)
-   PlayerStats.ReservedHPPercent:=ReadMemUInt(pH,PlayerStatsOffset+0x3c)
-   PlayerStats.MaxMana:=ReadMemUInt(pH,PlayerStatsOffset+0x50)
-   PlayerStats.ReservedManaFlat:=ReadMemUInt(pH,PlayerStatsOffset+0x5c)
-   PlayerStats.ReservedManaPercent:=ReadMemUInt(pH,PlayerStatsOffset+0x60)
-   PlayerStats.CurrMana:=ReadMemUInt(pH,PlayerStatsOffset+0x54)
-   PlayerStats.MaxEShield:=ReadMemUInt(pH,PlayerStatsOffset+0x74)
-   PlayerStats.CurrEShield:=ReadMemUInt(pH,PlayerStatsOffset+0x78)
+   PlayerStats.MaxHP:=ReadMemUInt(pH,PlayerStatsOffset+0x34)
+   PlayerStats.CurrHP:=ReadMemUInt(pH,PlayerStatsOffset+0x38)  
+   PlayerStats.ReservedHPFlat:=ReadMemUInt(pH,PlayerStatsOffset+0x40)
+   PlayerStats.ReservedHPPercent:=ReadMemUInt(pH,PlayerStatsOffset+0x44)
+   PlayerStats.MaxMana:=ReadMemUInt(pH,PlayerStatsOffset+0x64)
+   PlayerStats.CurrMana:=ReadMemUInt(pH,PlayerStatsOffset+0x68)
+   PlayerStats.ReservedManaFlat:=ReadMemUInt(pH,PlayerStatsOffset+0x70)
+   PlayerStats.ReservedManaPercent:=ReadMemUInt(pH,PlayerStatsOffset+0x74)
+   PlayerStats.MaxEShield:=ReadMemUInt(pH,PlayerStatsOffset+0x90)
+   PlayerStats.CurrEShield:=ReadMemUInt(pH,PlayerStatsOffset+0x94)
    PlayerActionIDOffset:=ReadMemUInt(pH,PlayerMain+0x1C)
    PlayerStats.PlayerActionID:=ReadMemUInt(pH,PlayerActionIDOffset+0x70)
    /*
@@ -1050,8 +1050,8 @@ ReadPlayerStats(hwnd, byRef PlayerStats)
    PlayerStats.PlayerActionID:=PlayerActionID2
    */
 
-   BuffListStart:=ReadMemUInt(pH,PlayerStatsOffset+0x94)
-   BuffListEnd:=ReadMemUInt(pH,PlayerStatsOffset+0x98)
+   BuffListStart:=ReadMemUInt(pH,PlayerStatsOffset+0xB0)
+   BuffListEnd:=ReadMemUInt(pH,PlayerStatsOffset+0xB4)
    BuffAmount:=((BuffListEnd-BuffListStart)/4)
    PlayerStats.BuffAmount:=((BuffListEnd-BuffListStart)/4)
    Loop, %BuffAmount%
@@ -1074,16 +1074,29 @@ ReadPlayerStats(hwnd, byRef PlayerStats)
 
    PanelInventoryOffset:=ReadMemUInt(pH,CheckBase+Offset8)
    PlayerStats.PanelInventory:=ReadMemUInt(pH,PanelInventoryOffset+0x754)
-   PanelSocialOffset:=ReadMemUInt(pH,CheckBase+Offset8+0x14)
-   PlayerStats.PanelSocial:=ReadMemUInt(pH,PanelSocialOffset+0x754)
-   PanelSkillTreeOffset:=ReadMemUInt(pH,CheckBase+Offset8+0x18)
+   PanelSocialOffset:=ReadMemUInt(pH,CheckBase+0xA98)
+   PlayerStats.PanelSocial:=ReadMemUInt(pH,PanelSocialOffset+0x754)	
+   PanelSkillTreeOffset:=ReadMemUInt(pH,CheckBase+0xA9C)
    PlayerStats.PanelSkillTree:=ReadMemUInt(pH,PanelSkillTreeOffset+0x754)
-   PanelWaypointOffset:=ReadMemUInt(pH,CheckBase+Offset8+0x30)
+   PanelWaypointOffset:=ReadMemUInt(pH,CheckBase+0xAB8)
    PlayerStats.PanelWaypoint:=ReadMemUInt(pH,PanelWaypointOffset+0x754)
-   PanelInstanceManagerOffset:=ReadMemUInt(pH,CheckBase+Offset8+0xB8)  ;added by immor
+   PanelInstanceManagerOffset:=ReadMemUInt(pH,CheckBase+0xB8C)
    PlayerStats.PanelInstanceManager:=ReadMemUInt(pH,PanelInstanceManagerOffset+0x754) ;added by immor
+   /*
    InCityOffset:=GetMultilevelPointer(pH,[CheckBase+Offset10,0x704,0x958])
+   InCityOffset:=GetMultilevelPointer(pH,[CheckBase+Offset10,0x954])
    PlayerStats.InCity:=ReadMemUInt(pH,InCityOffset+0x754)
+   */
+   AreaCodeNameOffset:=GetMultilevelPointer(pH,[fBase+Offset1,0x14,0x0])
+   AreaCodeName:=ReadMemStr(ph,AreaCodeNameOffset,100,"UTF-16")
+   If InStr(AreaCodeName, "town")
+   {
+      PlayerStats.InCity:=65536
+   }
+   else
+   {
+      PlayerStats.InCity:=65537
+   }
    MouseOnEnemyOffset:=GetMultilevelPointer(pH,[CheckBase+Offset11,0x8c4,0x7f4])
    PlayerStats.MouseOnEnemyStatus:=ReadMemUInt(pH,MouseOnEnemyOffset+0x38)
    EnemyNamePtr:=GetMultilevelPointer(ph,[CheckBase+Offset11,0x8c4,0xb30])
@@ -1107,7 +1120,7 @@ ReadFlasksData(hwnd, byRef FlasksData)
    If (!UiBase) ;not InGame
       return
    
-   FlaskInvBase:=GetMultilevelPointer(pH,[UiBase+0x8b4,0x950,0x20])
+   FlaskInvBase:=GetMultilevelPointer(pH,[UiBase+0x8E0,0x980,0x30])
 
    Loop, 5
    {
@@ -1164,7 +1177,7 @@ ReadFlasksData(hwnd, byRef FlasksData)
          If (FlasksData[A_Index].ChargesCurrent < FlasksData[A_Index].ChargesPerUse) ; not enough charges in this flask to use it, don't bother
             continue
 
-         FlaskMetadataPtr:=GetMultilevelPointer(ph,[currFlaskPtr,0,0x14])
+         FlaskMetadataPtr:=GetMultilevelPointer(ph,[currFlaskPtr,0,0x10])
          FlaskMetadataStr:=ReadMemStr(ph,FlaskMetadataPtr,70,"UTF-16")
          FlaskTypeStr:=SubStr(FlaskMetadataStr,23)
          FlasksData[A_Index].type:=FlaskTypeStr
@@ -4345,7 +4358,7 @@ ReadMe:
 return
 
 Donate:
-   Run "https://donate.doctorswithoutborders.org/onetime.cfm"
+   Run "https://www.paypal.me/yuwei1"
 return
 
 GuiClose:
